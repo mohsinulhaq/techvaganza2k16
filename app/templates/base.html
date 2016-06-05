@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+
+    <title> {% block title %}{% endblock %} | Techvaganza 16'</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/animate.min.css">
+    <link rel="stylesheet" href="/static/component.css">
+  </head>
+
+  <body>
+    <div class="jumbotron" style="margin: 0;">
+      <h1 class="text-center animated rubberBand">{% block heading %} {% endblock %}</h1>
+    </div>
+
+    <!-- Flash messages. -->
+    {% if get_flashed_messages(with_categories = true) %}
+      <div class="md-modal  md-effect-1 md-show" id="modal-1">
+          <div class="md-content">
+              <h3>Notice</h3>
+              <div>
+                  <ul>
+                      {% for category, msg in get_flashed_messages(with_categories=true) %}
+                      <li class="message flash-{{ category }}">{{ msg }}</li>
+                      {% endfor %}
+                  </ul>
+                  <button onclick="classie.toggle(document.getElementById('modal-1'),'md-show');" class="md-close">Close!</button>
+              </div>
+          </div>
+      </div>
+    {% endif %}
+
+    <div>
+      {% block content %} {% endblock %}
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="/static/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/classie.js"></script>
+
+    {% block scripts %} {% endblock %}
+  </body>
+</html>
