@@ -1,6 +1,8 @@
 from flask import render_template, flash, request
 from app import app
-
+from app.models import User
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy(app)
 
 # -----------------------------------------------------------------------------------------
 #     Admin Routes
@@ -35,7 +37,9 @@ def adminDashboardRegistrations():
 
 @app.route('/register/', methods = ['GET', 'POST'])
 def register():
-    if request.method == 'GET':
-        return render_template('register.html')
-    else:
-        return 'Laaenchaa'
+    if request.method == 'POST':
+        user = User(request.form['username'], request.form['password'], request.form['first_name'], request.form['last_name'], request.form['email'], request.form['cell'], request.form['gender'], request.form['college'], request.form['batch'], request.form['branch'])
+        db.session.add(user)
+        db.session.commit()
+        flash('Registration Successful!')
+    return render_template('register.html')

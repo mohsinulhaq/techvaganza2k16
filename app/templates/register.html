@@ -9,11 +9,11 @@
 {% endblock %}
 
 {% block content %}
-    <!-- <link rel="stylesheet" href="//techvaganza15.appspot.com/static/css/style1.css"> -->
+    <link rel="stylesheet" href="//techvaganza15.appspot.com/static/css/style1.css">
     <br><br>
     <div class="wrapper">
       <div id="box" class="container">
-        <form action="" method="POST">
+        <form action="#" method="POST">
           <div class="form-group">
             <label class="control-label">Firstname</label>
             <input type="text" class="form-control" name="first_name" value="">
@@ -24,30 +24,43 @@
           </div>
           <div class="form-group">
             <label class="control-label">Username</label>
-            <input type="text" class="form-control" name="name" value="">
+            <input type="text" class="form-control" name="username" value="">
           </div>
           <div class="form-group">
             <label class="control-label">Password</label>
-            <input type="password" class="form-control" name="name" value="">
+            <input type="password" class="form-control" name="password" value="">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Email</label>
+            <input type="email" class="form-control" name="email" value="">
           </div>
           <div class="form-group">
             <label class="control-label">Cell No.</label>
-            <input type="number" class="form-control" name="name" value="">
+            <input type="number" class="form-control" name="cell" value="">
           </div>
           <div class="form-group">
-            <label class="control-label">Gender</label>
-            <span  class="input-group-addon">
-              
-            </span>
-            <input type="radio" class="form-control" name="gender" value="M">
-            <input type="radio" class="form-control" name="gender" value="F">
+            <label for="optradio">Gender</label><br>
+            <label class="radio-inline"><input type="radio" name="gender" value="male" checked>M</label>
+            <label class="radio-inline"><input type="radio" name="gender" value="female">F</label>
           </div>
           <div class="form-group">
             <label class="control-label">College</label>
-            <input type="text" class="form-control" name="name" value="">
+            <input type="text" class="form-control" name="college" value="">
           </div>
+          <div class="form-group">
+            <label class="control-label">Batch</label>
+            <input type="text" class="form-control" name="batch" value="">
+          </div>
+          <div class="form-group">
+            <label class="control-label">Branch</label>
+            <input type="text" class="form-control" name="branch" value="">
+          </div>
+          <input type="submit" class="btn btn-info" value="Register">
+          <br><p>Already registered? Login <a href="">here</a></p>
         </form>
-        <a href="">Login?</a>
+        <br>
+
+        <br>
       </div>
     </div>
 {% endblock %}
