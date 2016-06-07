@@ -1,66 +1,147 @@
-{% extends "base.html" %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="/static/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-{% block title %}
-  Register
-{% endblock %}
+	<title>Register | Techvaganza 2k16</title>
 
-{% block heading %}
-  Register
-{% endblock %}
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
 
-{% block content %}
-    <link rel="stylesheet" href="//techvaganza15.appspot.com/static/css/style1.css">
-    <br><br>
-    <div class="wrapper">
-      <div id="box" class="container">
-        <form action="#" method="POST">
-          <div class="form-group">
-            <label class="control-label">Firstname</label>
-            <input type="text" class="form-control" name="first_name" value="">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Lastname</label>
-            <input type="text" class="form-control" name="last_name" value="">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Username</label>
-            <input type="text" class="form-control" name="username" value="">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Password</label>
-            <input type="password" class="form-control" name="password" value="">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Email</label>
-            <input type="email" class="form-control" name="email" value="">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Cell No.</label>
-            <input type="number" class="form-control" name="cell" value="">
-          </div>
-          <div class="form-group">
-            <label for="optradio">Gender</label><br>
-            <label class="radio-inline"><input type="radio" name="gender" value="male" checked>M</label>
-            <label class="radio-inline"><input type="radio" name="gender" value="female">F</label>
-          </div>
-          <div class="form-group">
-            <label class="control-label">College</label>
-            <input type="text" class="form-control" name="college" value="">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Batch</label>
-            <input type="text" class="form-control" name="batch" value="">
-          </div>
-          <div class="form-group">
-            <label class="control-label">Branch</label>
-            <input type="text" class="form-control" name="branch" value="">
-          </div>
-          <input type="submit" class="btn btn-info" value="Register">
-          <br><p>Already registered? Login <a href="">here</a></p>
-        </form>
-        <br>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/ct-paper.css" rel="stylesheet"/>
+    <link href="/static/css/demo.css" rel="stylesheet" />
+    <link href="/static/css/examples.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/component.css" />
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
 
-        <br>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-ct-transparent navbar-fixed-top" role="navigation-demo" id="register-navbar">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="http://techvaganza.org">Techvaganza 2k16</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="navigation-example-2">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="#" class="btn btn-simple">Login</a>
+            </li>
+           </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-->
+    </nav>
+
+    <!-- Flash messages. -->
+    {% if get_flashed_messages(with_categories = true) %}
+      <div class="md-modal  md-effect-1 md-show" id="modal-1">
+          <div class="md-content">
+              <h3>Notice</h3>
+              <div>
+                  <ul>
+                      {% for category, msg in get_flashed_messages(with_categories=true) %}
+                      <li class="message flash-{{ category }}">{{ msg }}</li>
+                      {% endfor %}
+                  </ul>
+                  <button onclick="classie.toggle(document.getElementById('modal-1'), 'md-show');" class="md-close">Close!</button>
+              </div>
+          </div>
       </div>
+    {% endif %}
+
+    <div class="wrapper">
+        <div class="register-background">
+            <div class="filter-black"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+                            <div class="register-card">
+
+                                <h3 class="title">Sign Up</h3>
+
+                                <form class="register-form" method="POST" action="#">
+                                    <label>Firstname</label>
+                                    <input type="text" class="form-control" name="first_name" placeholder="Firstname">
+
+                                    <label>Lastname</label>
+                                    <input type="text" class="form-control" name="last_name" placeholder="Lastname">
+
+                                    <label>Email</label>
+                                    <input type="email" class="form-control" placeholder="Email" name="email" required>
+
+                                    <label>Password</label>
+                                    <input type="password" class="form-control" placeholder="Password" name="password">
+
+                                    <label>Cell No.</label>
+                                    <input type="number" class="form-control" placeholder="Cell no." name="cell">
+
+									<label class="radio">
+		                    			<span class="icons">
+											<span class="first-icon fa fa-circle-o fa-base"></span>
+											<span class="second-icon fa fa-dot-circle-o fa-base"></span>
+										</span>
+										<input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="male">
+							            <i></i>Male
+					                </label>
+
+									<label class="radio">
+		                    			<span class="icons">
+											<span class="first-icon fa fa-circle-o fa-base"></span>
+											<span class="second-icon fa fa-dot-circle-o fa-base"></span>
+										</span>
+										<input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="female">
+							            <i></i>Female
+					                </label>
+
+									<label>College</label>
+                                    <input type="text" class="form-control" placeholder="College" name="college">
+
+									<label>Branch</label>
+                                    <input type="text" class="form-control" placeholder="Branch" name="branch">
+
+									<label>Batch</label>
+                                    <input type="number" class="form-control" placeholder="Batch" name="batch">
+
+                                    <input class="btn btn-danger btn-block" type="submit" value="Register">
+
+                                </form>
+                                <div class="forgot">
+                                    <a href="#" class="btn btn-simple btn-danger">Forgot password?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="footer register-footer text-center">
+                    <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+            </div>
+        </div>
     </div>
-{% endblock %}
+
+</body>
+
+<script src="/static/js/jquery.min.js" type="text/javascript"></script>
+<script src="/static/js/jquery-ui-1.10.4.custom.min.js" type="text/javascript"></script>
+<script src="/static/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="/static/js/ct-paper-checkbox.js"></script>
+<script src="/static/js/ct-paper-radio.js"></script>
+<script src="/static/js/bootstrap-select.js"></script>
+<script src="/static/js/bootstrap-datepicker.js"></script>
+<script src="/static/js/classie.js"></script>
+<script src="/static/js/ct-paper.js"></script>
+
+</html>
