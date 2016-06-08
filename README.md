@@ -5,5 +5,6 @@
 - if you haven't cloned the forked repository, create your own branch using `git branch branch_name` (replace branch_name with any name of your preference)
 - create a virtual environment if you prefer
 - execute `pip install -r requirements.txt`
+- To install globally (in case you haven't created a virtualenv) use 'sudo pip install -r requirements.txt'
 - now run the flask server using `python run.py`
 - open up [localhost:5000](http://localhost:5000) in your browser
