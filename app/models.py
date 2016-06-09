@@ -29,3 +29,17 @@ class User(db.Model):
         self.college = college
         self.batch = batch
         self.branch = branch
+
+
+# -----------------------------------------------------------------------------------------
+#     'notifications' table
+# -----------------------------------------------------------------------------------------
+
+class Notification(db.Model):
+    __tablename__ = 'notifications'
+
+    id = db.Column(db.Integer, primary_key = True)
+    filename = db.Column(db.String(255))
+
+    def __init__(self, filename):
+        self.filename = filename

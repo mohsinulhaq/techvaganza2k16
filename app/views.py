@@ -23,9 +23,21 @@ def adminDashboardEvents():
     return render_template('admin/events.html')
 
 
-@app.route('/admin/notifications/')
+@app.route('/admin/notifications/', methods = ['GET', 'POST'])
 def adminDashboardNotifications():
-    return render_template('admin/notifications.html')
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('Upload a proper format you twat!')
+        file = request.files['file']
+        # if user does not select file, browser also submits a empty part without filename
+        if file.filename == '':
+            flash('Sleepy much? Select a file first.')
+            return redirect(request.url)
+        if file:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return render_template('admin/notifications.html')
 
 
 @app.route('/admin/registrations/')
