@@ -37,7 +37,7 @@ def adminDashboardNotifications():
         if file:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return render_template('admin/notifications.html')
+    return render_template('admin/notifications.html')
 
 
 @app.route('/admin/registrations/')
