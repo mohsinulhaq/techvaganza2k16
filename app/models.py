@@ -10,8 +10,7 @@ class User(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     password = db.Column(db.String(255))
-    first_name = db.Column(db.String(255))
-    last_name = db.Column(db.String(255))
+    name = db.Column(db.String(255))
     email = db.Column(db.String(255), unique = True)
     cell = db.Column(db.String(255))
     gender= db.Column(db.String(6))
@@ -19,10 +18,9 @@ class User(db.Model):
     batch = db.Column(db.Integer())
     branch = db.Column(db.String(255))
 
-    def __init__(self, password, first_name, last_name, email, cell, gender, college, batch, branch):
+    def __init__(self, password, name, email, cell, gender, college, batch, branch):
         self.password = password
-        self.first_name = first_name
-        self.last_name = last_name
+        self.name = name
         self.email = email
         self.cell = cell
         self.gender = gender

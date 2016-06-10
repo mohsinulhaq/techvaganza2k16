@@ -4,8 +4,8 @@ from app import app, db
 from app.models import User
 from app.forms import RegistrationForm
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug import secure_filename
 
-# db = SQLAlchemy(app)
 
 # -----------------------------------------------------------------------------------------
 #     Admin Routes
@@ -52,8 +52,7 @@ def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST':
         user = User(request.form['password'],
-                    request.form['first_name'],
-                    request.form['last_name'],
+                    request.form['name'],
                     request.form['email'],
                     request.form['cell'],
                     request.form['gender'],
