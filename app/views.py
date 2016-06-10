@@ -11,7 +11,6 @@ from werkzeug import secure_filename
 #     Admin Routes
 # -----------------------------------------------------------------------------------------
 
-@app.route('/')
 @app.route('/admin/')
 def adminDashboard():
     return render_template('admin/admin-dashboard.html')
@@ -46,6 +45,11 @@ def adminDashboardRegistrations():
 # -----------------------------------------------------------------------------------------
 #     General Routes
 # -----------------------------------------------------------------------------------------
+
+@app.route('/', methods = ['GET'])
+def index():
+    return render_template('comingsoon.html')
+
 
 @app.route('/register/', methods = ['GET', 'POST'])
 def register():
