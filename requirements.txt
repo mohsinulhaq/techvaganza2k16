@@ -8,16 +8,11 @@ flask-migrate
 sqlalchemy-migrate
 flask-whooshalchemy
 flask-wtf
-flask-babel
-guess_language
-flipflop
-coverage
 Flask-OAuth
 Flask-Principal
 Flask-Script
 Flask-Security
 Flask-Social
-Flask-Triangle
 mailgun
 MarkupSafe
 mysqlclient
@@ -30,3 +25,4 @@ Werkzeug
 wheel
 Whoosh
 WTForms
+flask_debugtoolbar
