@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-# from flask_debugtoolbar import DebugToolbarExtension
+from flask_debugtoolbar import DebugToolbarExtension
 
 # Create an Instance of Flask
 app = Flask(__name__)
@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config.from_object('config')
 
 # Flask Debug Toolbar
-# toolbar = DebugToolbarExtension(app)
+toolbar = DebugToolbarExtension(app)
 
 # Create an instance of SQLAlchemy
 db = SQLAlchemy(app)

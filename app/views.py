@@ -1,4 +1,5 @@
-from flask import render_template, flash, request
+import os
+from flask import render_template, flash, request, redirect
 from app import app, db
 from app.models import User
 from app.forms import RegistrationForm
@@ -13,8 +14,6 @@ from flask_sqlalchemy import SQLAlchemy
 @app.route('/')
 @app.route('/admin/')
 def adminDashboard():
-    flash('laenchaaaaa')
-    flash('gupnaaa')
     return render_template('admin/admin-dashboard.html')
 
 
@@ -26,17 +25,16 @@ def adminDashboardEvents():
 @app.route('/admin/notifications/', methods = ['GET', 'POST'])
 def adminDashboardNotifications():
     if request.method == 'POST':
-        # check if the post request has the file part
+        file = False
         if 'file' not in request.files:
-            flash('Upload a proper format you twat!')
+            flash('Sleepy much? Select a proper file first.')
         file = request.files['file']
-        # if user does not select file, browser also submits a empty part without filename
         if file.filename == '':
-            flash('Sleepy much? Select a file first.')
+            flash('Sleepy much? Select a proper file first.')
             return redirect(request.url)
         if file:
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
+            flash('Notification uploaded successfully')
     return render_template('admin/notifications.html')
 
 

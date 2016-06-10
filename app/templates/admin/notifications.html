@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+
     <ol class="breadcrumb">
         <li><a href="http://techvaganza.org">Main Site</a></li>
         <li><a href="/admin/">Home</a></li>
@@ -13,4 +14,14 @@
 
     <h1>Notifications</h1>
     <hr>
+
+    <!-- Add a new notification. -->
+    <form action="#" method='post' enctype=multipart/form-data>
+        <div class="form-group">
+          <label for="file">Notification PDF: </label>
+          <input type="file" class="form-control" name="file">
+        </div>
+        <input type="submit" value="Upload Notification" class="btn btn-primary">
+    </form>
+
 {% endblock %}
