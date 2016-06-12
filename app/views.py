@@ -39,8 +39,14 @@ def adminDashboardNotifications():
 
 @app.route('/admin/registrations/')
 def adminDashboardRegistrations():
-    return render_template('admin/registrations.html')
+    users = User.query.all()
+    return render_template('admin/registrations.html', users=users)
 
+
+@app.route('/admin/registrations/view/<int:id>')
+def adminDashboardViewRegistration(id):
+    user = User.query.get(id)
+    return render_template('admin/viewregistration.html', user=user)
 
 # -----------------------------------------------------------------------------------------
 #     General Routes
