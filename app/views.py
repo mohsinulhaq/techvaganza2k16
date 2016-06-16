@@ -54,7 +54,7 @@ def adminDashboardViewRegistration(id):
 
 @app.route('/', methods = ['GET'])
 def index():
-    return render_template('comingsoon.html')
+    return render_template('index.html')
 
 
 @app.route('/register/', methods = ['GET', 'POST'])
