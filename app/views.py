@@ -3,9 +3,7 @@ from flask import render_template, flash, request, redirect, session
 from app import app, db
 from app.models import User, Event
 from app.forms import RegistrationForm
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug import secure_filename
-
+from htmlmin.minify import html_minify
 
 # -----------------------------------------------------------------------------------------
 #     Admin Routes
@@ -62,7 +60,8 @@ def adminDashboardViewRegistration(id):
 
 @app.route('/', methods = ['GET'])
 def index():
-    return render_template('index.html')
+    rendered_html = render_template('index.html')
+    return html_minify(rendered_html)
 
 
 @app.route('/register/', methods = ['GET', 'POST'])
