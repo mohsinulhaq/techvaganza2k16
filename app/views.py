@@ -1,7 +1,7 @@
 import os
 from flask import render_template, flash, request, redirect
 from app import app, db
-from app.models import User
+from app.models import User, Event
 from app.forms import RegistrationForm
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug import secure_filename
@@ -16,8 +16,16 @@ def adminDashboard():
     return render_template('admin/admin-dashboard.html')
 
 
-@app.route('/admin/events/')
+@app.route('/admin/events/', methods = ['GET', 'POST'])
 def adminDashboardEvents():
+    if request.method == 'POST':
+        event = Event(request.form['title'],
+                    request.form['slug'],
+                    request.form['description'],
+                    request.form['body'])
+        db.session.add(event)
+        db.session.commit()
+        flash('Event Upload Successful!')
     return render_template('admin/events.html')
 
 
@@ -73,3 +81,13 @@ def register():
         db.session.commit()
         flash('Registration Successful!')
     return render_template('register.html')
+
+
+@app.route('/events/', methods = ['GET'])
+def events():
+    return "events"
+
+
+@app.route('/events/<slug>', methods = ['GET'])
+def event(slug):
+    return ('events/' + slug + '.html')

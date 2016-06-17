@@ -41,3 +41,23 @@ class Notification(db.Model):
 
     def __init__(self, filename):
         self.filename = filename
+
+
+# -----------------------------------------------------------------------------------------
+#     'events' table
+# -----------------------------------------------------------------------------------------
+
+class Event(db.Model):
+    __tablename__ = 'events'
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    description = db.Column(db.String(512))
+    slug = db.Column(db.String(255), unique = True)
+    body = db.Column(db.String(20480))
+
+    def __init__(self, title, slug, description, body):
+        self.title = title
+        self.description = description
+        self.slug = slug
+        self.body = body
