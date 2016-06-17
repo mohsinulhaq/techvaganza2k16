@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    About
+    {{ event.title }}
 {% endblock %}
 
 {% block content %}
@@ -10,12 +10,16 @@
         <div class="register-background">
             <div class="filter-black"></div>
                 <div class="container">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="text-center housekeeping-well" >
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="housekeeping-well" >
 
-                            <h3 class="animated infinite pulse">About Us</h3>
-                            <section>
-                                All about us.
+                            <h2 class="animated flip" style="color: #51658e">{{ event.title }}</h2>
+
+                            <hr>
+                            <section class="animated slideInUp">
+
+                                {{ event.body | safe}}
+
                             </section>
 
                         </div>
@@ -23,8 +27,9 @@
                 </div>
 
             <!-- Bottom Text -->
+            <br><br><br><br><br>
             <div class="footer register-footer text-center">
-                    <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+                <h6>&copy; Techvaganza 2k16</h6>
             </div>
         </div>
     </div>
