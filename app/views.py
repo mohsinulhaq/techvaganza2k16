@@ -51,7 +51,7 @@ def adminDashboardRegistrations():
     return render_template('admin/registrations.html', users=users)
 
 
-@app.route('/admin/registrations/view/<int:id>')
+@app.route('/admin/registrations/<int:id>')
 def adminDashboardViewRegistration(id):
     user = User.query.get(id)
     return render_template('admin/viewregistration.html', user=user)
@@ -91,3 +91,24 @@ def events():
 @app.route('/events/<slug>', methods = ['GET'])
 def event(slug):
     return ('events/' + slug + '.html')
+
+
+# -----------------------------------------------------------------------------------------
+#     Housekeeping Routes
+# -----------------------------------------------------------------------------------------
+
+@app.route('/<page>/')
+def housekeeping(page):  # For handling pages: about, contact, sponsors, our team.
+    try:
+        return render_template('housekeeping/' + page + '.html')
+    except Exception:
+        return "404"
+
+
+# -----------------------------------------------------------------------------------------
+#     Error Handlers
+# -----------------------------------------------------------------------------------------
+
+@app.errorhandler(404)
+def pageNotFound(e):
+    pass
