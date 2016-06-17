@@ -3,18 +3,19 @@
 <head>
     <title></title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet'>
-    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet'>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% assets "css" %}
+        <link rel="stylesheet" href="{{ ASSET_URL }}" />
+    {% endassets %}
 </head>
 <body>
 <div>
-    <section id="section1" data-0="transform:scale(1);opacity:1;" data-500="transform:scale(.7);opacity:0;">
-        <div class="product-wrap">
-            <h2>Techvaganza 2k16</h2>
-            <a href="#section2"><i class="fa fa-chevron-circle-down bounce fa-3x" aria-hidden="true"></i></a>
+    <section id="section1" data-0="transform:scale(1);opacity:1;" data-75p="transform:scale(.7);opacity:0;">
+        <div class="logo">
+            <h2>techvaganza</h2>
+            <h2>2k16</h2>
+            <a href="#section2" data-menu-top="600"><i class="fa fa-chevron-circle-down bounce fa-3x" aria-hidden="true"></i></a>
         </div>
     </section>
 
@@ -35,15 +36,8 @@
     </section>
 
 </div>
-<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/skrollr/0.6.30/skrollr.min.js"></script>
-<script type="text/javascript" src="http://maryvilleartdesign.com/cdn/skrollr.menu.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-      var s = skrollr.init();
-      skrollr.menu.init(s);
-    });
-</script>
-
+{% assets "js" %}
+    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 </body>
 </html>
