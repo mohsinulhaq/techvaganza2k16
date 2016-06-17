@@ -1,5 +1,5 @@
 import os
-from flask import render_template, flash, request, redirect
+from flask import render_template, flash, request, redirect, session
 from app import app, db
 from app.models import User, Event
 from app.forms import RegistrationForm
@@ -90,7 +90,8 @@ def events():
 
 @app.route('/events/<slug>', methods = ['GET'])
 def event(slug):
-    return ('events/' + slug + '.html')
+    event = Event.query.filter_by(slug = slug).first()
+    return render_template('events/event.html', event = event)
 
 
 # -----------------------------------------------------------------------------------------
