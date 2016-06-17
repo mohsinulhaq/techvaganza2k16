@@ -11,7 +11,7 @@ from htmlmin.minify import html_minify
 
 @app.route('/admin/')
 def adminDashboard():
-    return render_template('admin/admin-dashboard.html')
+    return html_minify(render_template('admin/admin-dashboard.html'))
 
 
 @app.route('/admin/events/', methods = ['GET', 'POST'])
@@ -24,7 +24,7 @@ def adminDashboardEvents():
         db.session.add(event)
         db.session.commit()
         flash('Event Upload Successful!')
-    return render_template('admin/events.html')
+    return html_minify(render_template('admin/events.html'))
 
 
 @app.route('/admin/notifications/', methods = ['GET', 'POST'])
@@ -40,19 +40,19 @@ def adminDashboardNotifications():
         if file:
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
             flash('Notification uploaded successfully')
-    return render_template('admin/notifications.html')
+    return html_minify(render_template('admin/notifications.html'))
 
 
 @app.route('/admin/registrations/')
 def adminDashboardRegistrations():
     users = User.query.all()
-    return render_template('admin/registrations.html', users=users)
+    return html_minify(render_template('admin/registrations.html', users=users))
 
 
 @app.route('/admin/registrations/<int:id>')
 def adminDashboardViewRegistration(id):
     user = User.query.get(id)
-    return render_template('admin/viewregistration.html', user=user)
+    return html_minify(render_template('admin/viewregistration.html', user=user))
 
 # -----------------------------------------------------------------------------------------
 #     General Routes
@@ -79,19 +79,19 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Registration Successful!')
-    return render_template('register.html')
+    return html_minify(render_template('register.html'))
 
 
 @app.route('/events/', methods = ['GET'])
 def events():
     events = Event.query.all()
-    return render_template('events/events.html', events = events)
+    return html_minify(render_template('events/events.html', events = events))
 
 
 @app.route('/events/<slug>', methods = ['GET'])
 def event(slug):
     event = Event.query.filter_by(slug = slug).first()
-    return render_template('events/event.html', event = event)
+    return html_minify(render_template('events/event.html', event = event))
 
 
 # -----------------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ def event(slug):
 @app.route('/<page>/')
 def housekeeping(page):  # For handling pages: about, contact, sponsors, our team.
     try:
-        return render_template('housekeeping/' + page + '.html')
+        return html_minify(render_template('housekeeping/' + page + '.html'))
     except Exception:
         return "404"
 
