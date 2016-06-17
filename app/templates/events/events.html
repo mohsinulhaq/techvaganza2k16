@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{ event.title }}
+     Events
 {% endblock %}
 
 {% block content %}
@@ -12,16 +12,19 @@
                 <div class="container">
                     <div class="col-md-10 col-md-offset-1">
                         <div class="housekeeping-well" >
-
-                            <h2 class="animated flip" style="color: #51658e">{{ event.title }}</h2>
-
-                            <hr>
                             <section class="animated slideInUp">
 
-                                {{ event.body | safe}}
+                                {% for event in events %}
+                                    <a href="{{ url_for('event', slug = event.slug) }}">
+                                        <h3 style="color: #51658e">{{ event.title }}</h3>
+                                    </a>
+                                    <p style="color: #f2efe7">
+                                        <em>{{ event.description }}</em>
+                                    </p>
+                                    <br>
+                                {% endfor %}
 
                             </section>
-
                         </div>
                     </div>
                 </div>

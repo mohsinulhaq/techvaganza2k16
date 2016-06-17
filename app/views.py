@@ -85,7 +85,8 @@ def register():
 
 @app.route('/events/', methods = ['GET'])
 def events():
-    return "events"
+    events = Event.query.all()
+    return render_template('events/events.html', events = events)
 
 
 @app.route('/events/<slug>', methods = ['GET'])
