@@ -1,5 +1,5 @@
 import os
-from flask import render_template, flash, request, redirect
+from flask import render_template, flash, request, redirect, session
 from app import app, db
 from app.models import User, Event
 from app.forms import RegistrationForm
@@ -9,24 +9,25 @@ from htmlmin.minify import html_minify
 #     Admin Routes
 # -----------------------------------------------------------------------------------------
 
-
 @app.route('/admin/')
 def admin_dashboard():
-    return render_template('admin/admin-dashboard.html')
+    return html_minify(render_template('admin/admin-dashboard.html'))
 
 
-@app.route('/admin/events/', methods=['GET', 'POST'])
+@app.route('/admin/events/', methods = ['GET', 'POST'])
 def admin_dashboard_events():
     if request.method == 'POST':
-        event = Event(request.form['title'], request.form['slug'],
-                      request.form['description'], request.form['body'])
+        event = Event(request.form['title'],
+                    request.form['slug'],
+                    request.form['description'],
+                    request.form['body'])
         db.session.add(event)
         db.session.commit()
         flash('Event Upload Successful!')
-    return render_template('admin/events.html')
+    return html_minify(render_template('admin/events.html'))
 
 
-@app.route('/admin/notifications/', methods=['GET', 'POST'])
+@app.route('/admin/notifications/', methods = ['GET', 'POST'])
 def admin_dashboard_notifications():
     if request.method == 'POST':
         file = False
@@ -39,32 +40,31 @@ def admin_dashboard_notifications():
         if file:
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], file.filename))
             flash('Notification uploaded successfully')
-    return render_template('admin/notifications.html')
+    return html_minify(render_template('admin/notifications.html'))
 
 
 @app.route('/admin/registrations/')
 def admin_dashboard_registrations():
     users = User.query.all()
-    return render_template('admin/registrations.html', users=users)
+    return html_minify(render_template('admin/registrations.html', users=users))
 
 
 @app.route('/admin/registrations/<int:id>')
 def admin_dashboard_view_registration(id):
     user = User.query.get(id)
-    return render_template('admin/viewregistration.html', user=user)
+    return html_minify(render_template('admin/viewregistration.html', user=user))
 
 # -----------------------------------------------------------------------------------------
 #     General Routes
 # -----------------------------------------------------------------------------------------
 
-
-@app.route('/', methods=['GET'])
+@app.route('/', methods = ['GET'])
 def index():
     rendered_html = render_template('index.html')
     return html_minify(rendered_html)
 
 
-@app.route('/register/', methods=['GET', 'POST'])
+@app.route('/register/', methods = ['GET', 'POST'])
 def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST':
@@ -79,19 +79,19 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Registration Successful!')
-    return render_template('register.html')
+    return html_minify(render_template('register.html'))
 
 
-@app.route('/events/', methods=['GET'])
+@app.route('/events/', methods = ['GET'])
 def events():
     events = Event.query.all()
-    return render_template('events/events.html', events=events)
+    return html_minify(render_template('events/events.html', events = events))
 
 
-@app.route('/events/<slug>', methods=['GET'])
+@app.route('/events/<slug>', methods = ['GET'])
 def event(slug):
-    event = Event.query.filter_by(slug=slug).first()
-    return render_template('events/event.html', event=event)
+    event = Event.query.filter_by(slug = slug).first()
+    return html_minify(render_template('events/event.html', event = event))
 
 
 # -----------------------------------------------------------------------------------------
@@ -99,12 +99,9 @@ def event(slug):
 # -----------------------------------------------------------------------------------------
 
 @app.route('/<page>/')
-def housekeeping(page):
-    """
-    For handling pages: about, contact, sponsors, our team.
-    """
+def housekeeping(page):  # For handling pages: about, contact, sponsors, our team.
     try:
-        return render_template('housekeeping/' + page + '.html')
+        return html_minify(render_template('housekeeping/' + page + '.html'))
     except Exception:
         return "404"
 
