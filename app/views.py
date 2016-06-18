@@ -111,5 +111,5 @@ def housekeeping(page):  # For handling pages: about, contact, sponsors, our tea
 # -----------------------------------------------------------------------------------------
 
 @app.errorhandler(404)
-def page_not_ound(e):
+def page_not_found(e):
     pass
