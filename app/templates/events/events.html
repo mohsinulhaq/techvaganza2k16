@@ -26,7 +26,7 @@
 
                                 <ul class="pagination">
                                     {% if pagination.has_prev %}
-                                        <li><a href="{{ url_for('events', page = pagination.prev_num) }}">Prev &laquo;</a></li>
+                                        <a href="{{ url_for('events', page = pagination.prev_num) }}">Prev &laquo;</a>
                                     {% endif %}
 
                                     {%- for page in pagination.iter_pages() %}
