@@ -12,7 +12,7 @@ from htmlmin.minify import html_minify
 
 @app.route('/admin/')
 def admin_dashboard():
-    return render_template('admin/admin-dashboard.html')
+    return render_template('admin/base.html')
 
 
 @app.route('/admin/events/', methods=['GET', 'POST'])

@@ -5,23 +5,22 @@
 {% endblock %}
 
 {% block content %}
-
-    <ol class="breadcrumb">
-        <li><a href="http://techvaganza.org">Main Site</a></li>
-        <li><a href="{{ url_for('admin_dashboard') }}">Home</a></li>
-        <li class="active">Notifications</li>
-    </ol>
-
-    <h1>Notifications</h1>
-    <hr>
-
-    <!-- Add a new notification. -->
-    <form action="#" method='post' enctype=multipart/form-data>
-        <div class="form-group">
-          <label for="file">Notification PDF: </label>
-          <input type="file" class="form-control" name="file">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <form action="#" method='post' enctype=multipart/form-data>
+                <div class="form-group">
+                    <label for="file">Notification PDF: </label>
+                    <input type="file" class="form-control" name="file">
+                </div>
+                <input type="submit" value="Upload Notification" class="btn btn-primary col-xs-offset-5">
+            </form>
         </div>
-        <input type="submit" value="Upload Notification" class="btn btn-primary">
-    </form>
+    </div>
 
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $('.nav-tabs>li.notifications').addClass('active').siblings().removeClass('active');
+    </script>
 {% endblock %}

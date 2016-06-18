@@ -14,7 +14,7 @@ class User(db.Model):
     name = db.Column(db.String(255))
     email = db.Column(db.String(255), unique=True)
     cell = db.Column(db.String(255))
-    gender= db.Column(db.String(6))
+    gender = db.Column(db.String(6))
     college = db.Column(db.String(255))
     batch = db.Column(db.Integer())
     branch = db.Column(db.String(255))
