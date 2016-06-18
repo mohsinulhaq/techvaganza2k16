@@ -18,8 +18,8 @@ bundles = {
     'css': Bundle(
         'css/index.css',
         'css/font-awesome.min.css',
-        'fonts/lato.css',
-        'fonts/comfortaa.css',
+        'css/comfortaa.css',
+        'css/lato.css',
         filters='cssmin',
         output='gen/styles.css'),
 
