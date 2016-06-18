@@ -83,9 +83,10 @@ def register():
 
 
 @app.route('/events/', methods=['GET'])
-def events():
-    events = Event.query.all()
-    return html_minify(render_template('events/events.html', events=events))
+@app.route('/events/<int:page>', methods=['GET'])
+def events(page=1):
+    pagination = Event.query.paginate(page, app.config['RESULTS_PER_PAGE'], False)
+    return html_minify(render_template('events/events.html', pagination=pagination))
 
 
 @app.route('/events/<slug>', methods=['GET'])
