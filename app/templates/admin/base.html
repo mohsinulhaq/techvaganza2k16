@@ -9,12 +9,13 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/component.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='fonts/lato.css') }}">
   {% block styles %}{% endblock %}
 </head>
 
-<body>
+<body style="font-family: 'Lato', sans-serif;">
 <div class="jumbotron" style="margin-bottom: 0;">
-  <h1 class="text-center">Admin Dashboard</h1>
+  <h1 class="text-center"><a href="{{ url_for('index') }}" style="text-decoration: none; color: black;">Admin Dashboard</a></h1>
 </div>
 <ul class="nav nav-tabs nav-justified" style="margin-bottom: 10px;">
   <li class="events"><a href="{{ url_for('admin_dashboard_events') }}">Events</a></li>
