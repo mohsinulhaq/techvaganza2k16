@@ -1,36 +1,39 @@
 {% extends "admin/base.html" %}
 
 {% block title %}
-    Registrations
+  Registrations
 {% endblock %}
 
 {% block content %}
-    <ol class="breadcrumb">
-        <li><a href="http://techvaganza.org">Main Site</a></li>
-        <li><a href="{{ url_for('adminDashboard') }}">Home</a></li>
-        <li class="active">Registrations</li>
-    </ol>
-
-    <h1>Registrations</h1>
-    <hr>
-    <table class="table">
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2 text-center">
+      <table class="table table-responsive table-striped table-hover">
         <thead>
-            <tr>
-                <td>Name</td>
-                <td>College</td>
-                <td>Batch</td>
-                <td>Action</td>
-            </tr>
+        <tr>
+          <td><strong>Name</strong></td>
+          <td><strong>College</strong></td>
+          <td><strong>Batch</strong></td>
+          <td><strong>Action</strong></td>
+        </tr>
         </thead>
         <tbody>
-            {% for user in users %}
-            <tr>
-                <td>{{ user.name }}</td>
-                <td>{{ user.college }}</td>
-                <td>{{ user.batch }}</td>
-                <td><a class="btn btn-info" href="{{ url_for('adminDashboardViewRegistration', id=user.id) }}">View</a></td>
-            </tr>
-            {% endfor %}
+        {% for user in users %}
+          <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.college }}</td>
+            <td>{{ user.batch }}</td>
+            <td><a class="btn btn-info" href="{{ url_for('admin_dashboard_view_registration', id=user.id) }}">View</a>
+            </td>
+          </tr>
+        {% endfor %}
         </tbody>
-    </table>
+      </table>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $('.nav-tabs>li.registrations').addClass('active').siblings().removeClass('active');
+  </script>
 {% endblock %}

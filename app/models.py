@@ -5,20 +5,22 @@ from wtforms import Form, BooleanField, TextField, PasswordField, validators
 #     'users' table
 # -----------------------------------------------------------------------------------------
 
+
 class User(db.Model):
     __tablename__ = 'users'
 
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     password = db.Column(db.String(255))
     name = db.Column(db.String(255))
-    email = db.Column(db.String(255), unique = True)
+    email = db.Column(db.String(255), unique=True)
     cell = db.Column(db.String(255))
-    gender= db.Column(db.String(6))
+    gender = db.Column(db.String(6))
     college = db.Column(db.String(255))
     batch = db.Column(db.Integer())
     branch = db.Column(db.String(255))
 
-    def __init__(self, password, name, email, cell, gender, college, batch, branch):
+    def __init__(self, password, name, email, cell, gender, college, batch,
+                 branch):
         self.password = password
         self.name = name
         self.email = email
@@ -36,7 +38,7 @@ class User(db.Model):
 class Notification(db.Model):
     __tablename__ = 'notifications'
 
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     filename = db.Column(db.String(255))
 
     def __init__(self, filename):
@@ -50,10 +52,10 @@ class Notification(db.Model):
 class Event(db.Model):
     __tablename__ = 'events'
 
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
     description = db.Column(db.String(512))
-    slug = db.Column(db.String(255), unique = True)
+    slug = db.Column(db.String(255), unique=True)
     body = db.Column(db.String(20480))
 
     def __init__(self, title, slug, description, body):

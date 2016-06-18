@@ -1,82 +1,79 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Register
+  Register
 {% endblock %}
 
 {% block content %}
+  <div class="wrapper">
+    <div class="register-background">
+      <div class="filter-black"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+            <div class="register-card">
 
-    <div class="wrapper">
-        <div class="register-background">
-            <div class="filter-black"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
-                            <div class="register-card">
+              <h3 class="title animated infinite pulse">Sign Up</h3>
 
-                                <h3 class="title">Sign Up</h3>
+              <form class="register-form" method="POST" action="#">
+                <label>Full Name</label>
+                <input type="text" class="form-control" name="name" placeholder="name">
 
-                                <form class="register-form" method="POST" action="#">
-                                    <label>Full Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="name">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Email" name="email" required>
 
-                                    <label>Email</label>
-                                    <input type="email" class="form-control" placeholder="Email" name="email" required>
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" name="password">
 
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" placeholder="Password" name="password">
+                <label>Cell No.</label>
+                <input type="number" class="form-control" placeholder="Cell no." name="cell">
 
-                                    <label>Cell No.</label>
-                                    <input type="number" class="form-control" placeholder="Cell no." name="cell">
+                <label class="radio">
+                  <span class="icons">
+                    <span class="first-icon fa fa-circle-o fa-base"></span>
+                    <span class="second-icon fa fa-dot-circle-o fa-base"></span>
+                  </span>
+                  <input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="male">
+                  <i></i>Male
+                </label>
 
-									<label class="radio">
-		                    			<span class="icons">
-											<span class="first-icon fa fa-circle-o fa-base"></span>
-											<span class="second-icon fa fa-dot-circle-o fa-base"></span>
-										</span>
-										<input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="male">
-							            <i></i>Male
-					                </label>
+                <label class="radio">
+                  <span class="icons">
+                    <span class="first-icon fa fa-circle-o fa-base"></span>
+                    <span class="second-icon fa fa-dot-circle-o fa-base"></span>
+                  </span>
+                  <input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="female">
+                  <i></i>Female
+                </label>
 
-									<label class="radio">
-		                    			<span class="icons">
-											<span class="first-icon fa fa-circle-o fa-base"></span>
-											<span class="second-icon fa fa-dot-circle-o fa-base"></span>
-										</span>
-										<input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="female">
-							            <i></i>Female
-					                </label>
+                <label>College</label>
+                <input type="text" class="form-control" placeholder="College" name="college">
 
-									<label>College</label>
-                                    <input type="text" class="form-control" placeholder="College" name="college">
+                <label>Branch</label>
+                <input type="text" class="form-control" placeholder="Branch" name="branch">
 
-									<label>Branch</label>
-                                    <input type="text" class="form-control" placeholder="Branch" name="branch">
+                <label>Batch</label>
+                <input type="number" class="form-control" placeholder="Batch" name="batch">
 
-									<label>Batch</label>
-                                    <input type="number" class="form-control" placeholder="Batch" name="batch">
+                <input class="btn btn-danger btn-block" type="submit" value="Register">
 
-                                    <input class="btn btn-danger btn-block" type="submit" value="Register">
-
-                                </form>
-                                <div class="forgot">
-                                    <a href="#" class="btn btn-simple btn-danger">Forgot password?</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <div class="footer register-footer text-center">
-                    <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+              </form>
+              <div class="forgot">
+                <a href="#" class="btn btn-simple btn-danger">Forgot password?</a>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="footer register-footer text-center">
+        <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+      </div>
     </div>
+  </div>
 
 {% endblock %}
 
 {% block scripts %}
-
-    <script src="/static/js/ct-paper-radio.js"></script>
-    <script src="/static/js/ct-paper.js"></script>
-
+  <script src="{{ url_for('static', filename='js/ct-paper-radio.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/ct-paper.js') }}"></script>
 {% endblock %}

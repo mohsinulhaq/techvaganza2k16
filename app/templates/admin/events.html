@@ -1,52 +1,69 @@
 {% extends "admin/base.html" %}
 
 {% block title %}
-    Events
-{% endblock %}
-
-{% block head %}
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+  Events
 {% endblock %}
 
 {% block content %}
-    <ol class="breadcrumb">
-        <li><a href="http://techvaganza.org">Main Site</a></li>
-        <li><a href="{{ url_for('adminDashboard') }}">Home</a></li>
-        <li class="active">Events</li>
-    </ol>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <form method="POST" action="#" accept-charset="UTF-8">
+        <div class="form-group ">
+          <label for="title">Title: </label>
+          <input class="form-control" name="title" type="text" id="title">
+        </div>
 
-    <h1>Events</h1>
-    <hr>
+        <div class="form-group ">
+          <label for="slug">Slug: </label>
+          <input class="form-control" name="slug" type="text" id="slug">
+        </div>
 
-    <div class="row">
-            <form method="POST" action="#" accept-charset="UTF-8" class="col-md-11">
-                <div class="form-group ">
-                   <label for="title">Title: </label>
-                   <input class="form-control" name="title" type="text" id="title">
+        <div class="form-group ">
+          <label for="description">Description: </label>
+          <input class="form-control" name="description" type="text" id="description">
+        </div>
 
-                </div>
+        <div class="form-group ">
+          <label for="body">Body: </label>
+          <textarea class="form-control" rows="20" name="body" cols="50"></textarea>
+        </div>
 
-                <div class="form-group ">
-                   <label for="slug">Slug: </label>
-                   <input class="form-control" name="slug" type="text" id="slug">
-
-                </div>
-
-                <div class="form-group ">
-                   <label for="description">Description: </label>
-                   <input class="form-control" name="description" type="text" id="description">
-                </div>
-
-                <div class="form-group ">
-                   <label for="body">Body: </label>
-                   <textarea class="form-control" rows="20" name="body" cols="50"></textarea>
-                </div>
-
-                <div class="form-group">
-                   <input class="btn btn-success" type="submit" value="Upload Event">
-                </div>
-            </form>
-
+        <div class="form-group col-sm-offset-5 col-xs-offset-3">
+          <input class="btn btn-success" type="submit" value="Upload Event">
+        </div>
+      </form>
     </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $('.nav-tabs>li.events').addClass('active').siblings().removeClass('active');
+  </script>
+  <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+  <script>
+    tinymce.init({
+      selector: 'textarea',
+      plugins: [
+        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+        'searchreplace visualblocks visualchars code',
+        'insertdatetime nonbreaking save table directionality',
+        'emoticons template paste textcolor colorpicker textpattern imagetools'
+      ],
+      toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+      toolbar2: 'print preview | forecolor backcolor emoticons | fontselect |  fontsizeselect',
+      height: 300,
+      browser_spellcheck: true,
+      element_format: 'html',
+      protect: [/[\n\f\r\t\v]/g],
+      setup: function (editor) {
+        editor.on('keydown', function (e) {
+          if (e.keyCode == 9) {
+            e.preventDefault();
+            editor.insertContent('&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;');
+          }
+        });
+      }
+    });
+  </script>
 {% endblock %}

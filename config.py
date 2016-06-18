@@ -9,3 +9,6 @@ ALLOWED_EXTENSIONS = {'txt', 'pdf', 'doc', 'docx'}
 
 # For flask debug toolbar.
 DEBUG_TB_INTERCEPT_REDIRECTS = False
+
+# For pagination
+RESULTS_PER_PAGE = 5

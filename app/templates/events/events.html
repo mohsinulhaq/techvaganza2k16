@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Events
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <div class="register-background">
+            <div class="filter-black"></div>
+                <div class="container">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="housekeeping-well" >
+                            <section class="animated slideInUp">
+
+                                {% for event in pagination.items %}
+                                    <a href="{{ url_for('event', slug = event.slug) }}">
+                                        <h3 style="color: #51658e">{{ event.title }}</h3>
+                                    </a>
+                                    <p style="color: #f2efe7">
+                                        <em>{{ event.description }}</em>
+                                    </p>
+                                    <br>
+                                {% endfor %}
+
+                                <ul class="pagination">
+                                    {% if pagination.has_prev %}
+                                        <a href="{{ url_for('events', page = pagination.prev_num) }}">Prev &laquo;</a>
+                                    {% endif %}
+
+                                    {%- for page in pagination.iter_pages() %}
+                                        {% if page %}
+                                              {% if page != pagination.page %}
+                                                    <a href="{{ url_for('events', page = page) }}">{{ page }}</a>
+                                              {% else %}
+                                                <strong>{{ page }}</strong>
+                                              {% endif %}
+                                        {% else %}
+                                              <span class=ellipsis>…</span>
+                                        {% endif %}
+                                    {%- endfor %}
+
+                                    {% if pagination.has_next %}
+                                        <a href="{{ url_for('events', page = pagination.next_num) }}">Next &raquo;</a>
+                                    {% endif %}
+                                </ul>
+
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Bottom Text -->
+            <br><br><br><br><br>
+            <div class="footer register-footer text-center">
+                <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+            </div>
+        </div>
+      </div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src={{ url_for('static', filename='js/ct-paper.js') }}></script>
+{% endblock %}

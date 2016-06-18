@@ -1,3 +1,9 @@
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 body{
   margin: 0;
   font-family: 'Lato', sans-serif;
@@ -41,15 +47,15 @@ section h1{
   background:#8e44ad;
   z-index:5;
 }
-.product-wrap {
-  font-family: 'Press Start 2P', cursive;
-  font-size: large;
-  top: 50%;
+.logo {
+  font-family: 'Comfortaa', sans-serif;
+  font-size: xx-large;
+  top: 30%;
   color: #fff;
   position: absolute;
   width: 100%;
 }
-.product-wrap>a {
+.logo>a {
   color: white;
 }
 @keyframes bounce {
