@@ -1,47 +1,48 @@
 {% extends "admin/base.html" %}
 
 {% block title %}
-    Registrations
+  Registrations
 {% endblock %}
 
 {% block content %}
-    <ol class="breadcrumb">
-        <li><a href="http://techvaganza.org">Main Site</a></li>
-        <li><a href="{{ url_for('admin_dashboard') }}">Home</a></li>
-        <li><a href="{{ url_for('admin_dashboard_registrations') }}">Registration</a></li>
-        <li class="active">View Registration</li>
-    </ol>
+  <div class="row">
+    <div class="col-xs-8 col-xs-offset-2">
+      <table class="table table-responsive table-striped table-hover">
+        <tr>
+          <th>Name</th>
+          <td>{{ user.name }}</td>
+        </tr>
+        <tr>
+          <th>Cell</th>
+          <td>{{ user.cell }}</td>
+        </tr>
+        <tr>
+          <th>Email</th>
+          <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+          <th>College</th>
+          <td>{{ user.college }}</td>
+        </tr>
+        <tr>
+          <th>Batch</th>
+          <td>{{ user.batch }}</td>
+        </tr>
+        <tr>
+          <th>Branch</th>
+          <td>{{ user.branch }}</td>
+        </tr>
+        <tr>
+          <th>Gender</th>
+          <td>{% filter upper %}{{ user.gender }}{% endfilter %}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+{% endblock %}
 
-    <h1>View Registration</h1>
-    <hr>
-    <table class="table">
-        <tr>
-            <td>Name:</td>
-            <td>{{ user.name }}</td>
-        </tr>
-        <tr>
-            <td>Cell:</td>
-            <td>{{ user.cell }}</td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td>{{ user.email }}</td>
-        </tr>
-        <tr>
-            <td>College:</td>
-            <td>{{ user.college }}</td>
-        </tr>
-        <tr>
-            <td>Batch:</td>
-            <td>{{ user.batch }}</td>
-        </tr>
-        <tr>
-            <td>Branch:</td>
-            <td>{{ user.branch }}</td>
-        </tr>
-        <tr>
-            <td>Gender:</td>
-            <td>{% filter upper %}{{ user.gender }}{% endfilter %}</td>
-        </tr>
-    </table>
+{% block scripts %}
+  <script>
+    $('.nav-tabs>li.registrations').addClass('active').siblings().removeClass('active');
+  </script>
 {% endblock %}

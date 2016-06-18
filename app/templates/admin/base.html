@@ -2,42 +2,45 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title> {% block title %}{% endblock %} | Techvaganza 2k16</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/component.css') }}">
-    {% block styles %}{% endblock %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> {% block title %}{% endblock %} | Techvaganza 2k16</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/component.css') }}">
+  {% block styles %}{% endblock %}
 </head>
 
 <body>
 <div class="jumbotron" style="margin-bottom: 0;">
-    <h1 class="text-center">Admin Dashboard</h1>
+  <h1 class="text-center">Admin Dashboard</h1>
 </div>
 <ul class="nav nav-tabs nav-justified" style="margin-bottom: 10px;">
-    <li class="events"><a href="{{ url_for('admin_dashboard_events') }}">Events</a></li>
-    <li class="notifications"><a href="{{ url_for('admin_dashboard_notifications') }}">Notifications</a></li>
-    <li class="registrations"><a href="{{ url_for('admin_dashboard_registrations') }}">Registrations</a></li>
+  <li class="events"><a href="{{ url_for('admin_dashboard_events') }}">Events</a></li>
+  <li class="notifications"><a href="{{ url_for('admin_dashboard_notifications') }}">Notifications</a></li>
+  <li class="registrations"><a href="{{ url_for('admin_dashboard_registrations') }}">Registrations</a></li>
 </ul>
 <div class="container">
-    {% block content %}{% endblock %}
+  {% block content %}{% endblock %}
 </div>
 <!-- Flash messages -->
 {% if get_flashed_messages(with_categories = true) %}
-    <div class="md-modal  md-effect-1 md-show" id="modal-1">
-        <div class="md-content">
-            <h3>Notice</h3>
-            <div>
-                <ul>
-                    {% for category, msg in get_flashed_messages(with_categories=true) %}
-                        <li class="message flash-{{ category }}">{{ msg }}</li>
-                    {% endfor %}
-                </ul>
-                <button onclick="classie.toggle(document.getElementById('modal-1'),'md-show');" class="md-close">
-                    Close!
-                </button>
-            </div>
-        </div>
+  <div class="md-modal  md-effect-1 md-show" id="modal-1">
+    <div class="md-content">
+      <h3>Notice</h3>
+      <div>
+        <ul>
+          {% for category, msg in get_flashed_messages(with_categories=true) %}
+            <li class="message flash-{{ category }}">{{ msg }}</li>
+          {% endfor %}
+        </ul>
+        <button onclick="classie.toggle(document.getElementById('modal-1'),'md-show');" class="md-close">
+          Close!
+        </button>
+      </div>
     </div>
+  </div>
 {% endif %}
 
 <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
