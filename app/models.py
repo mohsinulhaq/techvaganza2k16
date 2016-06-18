@@ -61,3 +61,14 @@ class Event(db.Model):
         self.description = description
         self.slug = slug
         self.body = body
+
+# -----------------------------------------------------------------------------------------
+#     'events' table
+# -----------------------------------------------------------------------------------------
+
+class Event_registration(db.Model):
+    __tablename__ = "event_registrations"
+
+    id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    event_id = db.Column(db.Integer, db.ForeignKey("events.id"))

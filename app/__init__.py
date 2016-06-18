@@ -13,4 +13,4 @@ toolbar = DebugToolbarExtension(app)
 
 # Create an instance of SQLAlchemy
 db = SQLAlchemy(app)
-from app import views, models
+from app import views, models, api
