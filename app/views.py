@@ -10,12 +10,12 @@ from htmlmin.minify import html_minify
 # -----------------------------------------------------------------------------------------
 
 @app.route('/admin/')
-def adminDashboard():
+def admin_dashboard():
     return html_minify(render_template('admin/admin-dashboard.html'))
 
 
 @app.route('/admin/events/', methods = ['GET', 'POST'])
-def adminDashboardEvents():
+def admin_dashboard_events():
     if request.method == 'POST':
         event = Event(request.form['title'],
                     request.form['slug'],
@@ -28,7 +28,7 @@ def adminDashboardEvents():
 
 
 @app.route('/admin/notifications/', methods = ['GET', 'POST'])
-def adminDashboardNotifications():
+def admin_dashboard_notifications():
     if request.method == 'POST':
         file = False
         if 'file' not in request.files:
@@ -44,13 +44,13 @@ def adminDashboardNotifications():
 
 
 @app.route('/admin/registrations/')
-def adminDashboardRegistrations():
+def admin_dashboard_registrations():
     users = User.query.all()
     return html_minify(render_template('admin/registrations.html', users=users))
 
 
 @app.route('/admin/registrations/<int:id>')
-def adminDashboardViewRegistration(id):
+def admin_dashboard_view_registration(id):
     user = User.query.get(id)
     return html_minify(render_template('admin/viewregistration.html', user=user))
 
@@ -111,5 +111,5 @@ def housekeeping(page):  # For handling pages: about, contact, sponsors, our tea
 # -----------------------------------------------------------------------------------------
 
 @app.errorhandler(404)
-def pageNotFound(e):
+def page_not_ound(e):
     pass

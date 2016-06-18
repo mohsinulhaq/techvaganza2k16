@@ -7,7 +7,7 @@
 {% block content %}
     <ol class="breadcrumb">
         <li><a href="http://techvaganza.org">Main Site</a></li>
-        <li><a href="{{ url_for('adminDashboard') }}">Home</a></li>
+        <li><a href="{{ url_for('admin_dashboard') }}">Home</a></li>
         <li class="active">Registrations</li>
     </ol>
 
@@ -28,7 +28,7 @@
                 <td>{{ user.name }}</td>
                 <td>{{ user.college }}</td>
                 <td>{{ user.batch }}</td>
-                <td><a class="btn btn-info" href="{{ url_for('adminDashboardViewRegistration', id=user.id) }}">View</a></td>
+                <td><a class="btn btn-info" href="{{ url_for('admin_dashboard_view_registration', id=user.id) }}">View</a></td>
             </tr>
             {% endfor %}
         </tbody>
