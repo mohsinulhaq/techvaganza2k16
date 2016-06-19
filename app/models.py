@@ -65,7 +65,7 @@ class Event(db.Model):
         self.body = body
 
 # -----------------------------------------------------------------------------------------
-#     'events' table
+#     'Event Registrations' table
 # -----------------------------------------------------------------------------------------
 
 class Event_registration(db.Model):
