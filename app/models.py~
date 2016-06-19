@@ -113,4 +113,4 @@ class Workshop_registration(db.Model):
         self.user_id = user_id
         self.workshop_id = workshop_id
 
-# ------------------------------------    More Models to be added in future   ------------------------------------#
+# ------------------------------------    More Models to be added    ------------------------------------#
