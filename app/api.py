@@ -141,7 +141,7 @@ def create_event():
 
 
 
-#udate an event using the PUT method
+#update an event using the PUT method
 @app.route("/api/events/<int:event_id>",methods=["PUT"])
 def update_event(event_id):
     if 'title' in request.json:
