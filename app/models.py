@@ -63,3 +63,54 @@ class Event(db.Model):
         self.description = description
         self.slug = slug
         self.body = body
+
+# -----------------------------------------------------------------------------------------
+#     'Event Registrations' table
+# -----------------------------------------------------------------------------------------
+
+class Event_registration(db.Model):
+    __tablename__ = "event_registrations"
+
+    id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    event_id = db.Column(db.Integer, db.ForeignKey("events.id"))
+
+    def __init__(self, user_id,event_id):
+        self.user_id = user_id
+        self.event_id = event_id
+
+#-------------------------------------------------------------------------------------------
+#      'Workshops' table
+#-------------------------------------------------------------------------------------------
+
+class Workshop(db.Model):
+    __tablename__ = 'workshops'
+
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255))
+    description = db.Column(db.String(512))
+    slug = db.Column(db.String(255), unique=True)
+    body = db.Column(db.String(20480))
+
+    def __init__(self, title, slug, description, body):
+        self.title = title
+        self.description = description
+        self.slug = slug
+        self.body = body
+
+#--------------------------------------------------------------------------------------------
+#       'Workshop' Registrations table
+#--------------------------------------------------------------------------------------------
+
+class Workshop_registration(db.Model):
+    __tablename__ = "workshop_registrations"
+
+    id = db.Column(db.Integer, primary_key = True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    workshop_id = db.Column(db.Integer, db.ForeignKey("workshops.id"))
+
+    def __init__(self, user_id,workshop_id):
+        self.user_id = user_id
+        self.workshop_id = workshop_id
+
+# ------------------------------------    More Models to be added in future   ------------------------------------#

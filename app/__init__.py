@@ -36,4 +36,6 @@ assets.register(bundles)
 # Flask Debug Toolbar
 toolbar = DebugToolbarExtension(app)
 
-from app import views, models
+# Create an instance of SQLAlchemy
+db = SQLAlchemy(app)
+from app import views, models, api
