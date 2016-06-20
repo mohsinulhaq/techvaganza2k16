@@ -126,7 +126,7 @@
 			datepicker.removeClass('open');
 			
 			setTimeout(function(){
-    			datepicker.hide();
+    			this.picker.hide();
 			}, 500);
 			
 			$(window).off('resize', this.place);

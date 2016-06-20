@@ -2,7 +2,7 @@
 import json
 from flask import jsonify, abort, make_response, request
 from app import app, db, views, models
-from models import Event, Event_registration, User
+from .models import Event, Event_registration, User
 #converts a SQLAlchemy result row into a standard python dictionary
 def row2dict(row):
     d = {}

@@ -3,32 +3,19 @@
 
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title> {% block title %}{% endblock %} | Techvaganza 2k16</title>
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}"/>
   <link rel="stylesheet" href={{ url_for('static', filename='css/bootstrap.min.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/component.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/animate.min.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/ct-paper.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/demo.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/examples.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/font-awesome.min.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/montserrat.css') }}>
-
-  <style media="screen" rel="stylesheet">
-    .housekeeping-well > * {
-      color: #f2efe7;
-    }
-  </style>
-
+  <link rel="stylesheet" href={{ url_for('static', filename='css/material-kit.css') }}>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
   {% block styles %}{% endblock %}
-
 </head>
 
 <body>
-
-<nav class="navbar navbar-ct-transparent navbar-fixed-top" id="register-navbar" style="z-index: 9999;">
+<nav class="navbar navbar-transparent navbar-absolute">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
@@ -37,48 +24,61 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="{{ url_for('index') }}">Techvaganza 2k16</a>
+      <a class="navbar-brand" href={{ url_for('index') }}>Techvaganza 2k16</a>
     </div>
 
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ url_for('events') }}" class="btn btn-simple">Events</a></li>
-        <li><a href="{{ url_for('housekeeping', page = 'about') }}" class="btn btn-simple">About Us</a></li>
-        <li><a href="{{ url_for('housekeeping', page = 'contact') }}" class="btn btn-simple">Contact Us</a></li>
-        <li><a href="#" class="btn btn-simple">Login</a></li>
+        <li>
+          <a href="{{ url_for('events') }}" class="btn" target="_blank">
+            Events
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('housekeeping', page = 'about') }}" target="_blank" class="btn">
+            About Us
+          </a>
+        </li>
+        <li>
+          <a href="{{ url_for('housekeeping', page = 'contact') }}" target="_blank" class="btn">
+            Contact Us
+          </a>
+        </li>
+        <li>
+          <a href="#" target="_blank" class="btn">
+            Login
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com/" target="_blank" class="btn btn-simple">
+            <i class="fa fa-twitter"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.facebook.com/" target="_blank" class="btn btn-simple">
+            <i class="fa fa-facebook-square"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/" target="_blank" class="btn btn-simple">
+            <i class="fa fa-instagram"></i>
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<div>
+<div class="wrapper">
   {% block content %}{% endblock %}
 </div>
 
-<!-- Flash messages. -->
-{% if get_flashed_messages(with_categories = true) %}
-  <div class="md-modal  md-effect-1 md-show" id="modal-1">
-    <div class="md-content">
-      <h3>Notice</h3>
-      <div>
-        <ul>
-          {% for category, msg in get_flashed_messages(with_categories=true) %}
-            <li class="message flash-{{ category }}">{{ msg }}</li>
-          {% endfor %}
-        </ul>
-        <button onclick="classie.toggle(document.getElementById('modal-1'), 'md-show');" class="md-close">Close!
-        </button>
-      </div>
-    </div>
-  </div>
-{% endif %}
-
-<!-- Scripts -->
 <script type="text/javascript" src={{ url_for('static', filename='js/jquery.min.js') }}></script>
-<script type="text/javascript" src={{ url_for('static', filename='js/jquery-ui-1.10.4.custom.min.js') }}></script>
-<script type="text/javascript" src={{ url_for('static', filename='js/bootstrap.min.js') }}></script>
-<script type="text/javascript" src={{ url_for('static', filename='js/classie.js') }}></script>
-
-{% block scripts %} {% endblock %}
+<script type="text/javascript" src={{ url_for('static', filename='js/bootstrap-3.3.5.min.js') }}></script>
+<script type="text/javascript" src={{ url_for('static', filename='js/material.min.js') }}></script>
+<script type="text/javascript" src={{ url_for('static', filename='js/nouislider.min.js') }}></script>
+<script type="text/javascript" src={{ url_for('static', filename='js/bootstrap-datepicker.js') }}></script>
+<script type="text/javascript" src={{ url_for('static', filename='js/material-kit.js') }}></script>
+{% block scripts %}{% endblock %}
 </body>
 </html>
