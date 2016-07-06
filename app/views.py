@@ -98,7 +98,10 @@ def login():
     if registered_user is None:
         flash('Username or Password is invalid')
         return html_minify(render_template('login.html'))
-    login_user(registered_user)
+    remember_me = False
+    if 'remember_me' in request.form:
+        remember_me = True
+    login_user(registered_user, remember=remember_me)
     flash('Logged in successfully')
     return html_minify(render_template('users/user.html'))
 
