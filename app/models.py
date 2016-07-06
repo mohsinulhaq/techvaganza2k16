@@ -30,10 +30,26 @@ class User(db.Model):
         self.batch = batch
         self.branch = branch
 
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return unicode(self.id)
+
+    def __repr__(self):
+        return '<User %r>' % self.name
+
 
 # -----------------------------------------------------------------------------------------
 #     'notifications' table
 # -----------------------------------------------------------------------------------------
+
 
 class Notification(db.Model):
     __tablename__ = 'notifications'
@@ -69,7 +85,7 @@ class Event(db.Model):
 #     'Event Registrations' table
 # -----------------------------------------------------------------------------------------
 
-class Event_registration(db.Model):
+class EventRegistration(db.Model):
     __tablename__ = "event_registrations"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -105,7 +121,7 @@ class Workshop(db.Model):
 # --------------------------------------------------------------------------------------------
 
 
-class Workshop_registration(db.Model):
+class WorkshopRegistration(db.Model):
     __tablename__ = "workshop_registrations"
 
     id = db.Column(db.Integer, primary_key=True)

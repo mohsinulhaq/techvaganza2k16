@@ -2,7 +2,7 @@
 import json
 from flask import jsonify, abort, make_response, request
 from app import app, db, views, models
-from models import Event, Event_registration, User
+from models import Event, EventRegistration, User
 #converts a SQLAlchemy result row into a standard python dictionary
 def row2dict(row):
     d = {}
@@ -188,7 +188,7 @@ def delete_event(event_id):
 #users
 @app.route("/api/event_registrations",methods=["GET"])
 def get_event_registrations():
-    res = Event_registration.query.all()
+    res = EventRegistration.query.all()
     registrations = []
 
     if len(res) == 0:
@@ -202,7 +202,7 @@ def get_event_registrations():
 #GET method to retrieve a event_registration details, given its id
 @app.route("/api/event_registrations/<int:event_registration_id>",methods=["GET"])
 def get_event_registration(event_registration_id):
-    res = Event_registration.query.filter_by(id = event_registration_id).all()
+    res = EventRegistration.query.filter_by(id = event_registration_id).all()
     registrations = []
     if len(res) == 0:
         return jsonify(registrations)
@@ -218,7 +218,7 @@ def get_event_registration(event_registration_id):
 def insert_event_registration():
     if not request.json or not 'user_id' in request.json or not 'event_id' in request.json:
         abort(400)
-    registration = Event_registration(request.json['user_id'],request.json['event_id'])
+    registration = EventRegistration(request.json['user_id'],request.json['event_id'])
     db.session.add(registration)
     db.session.commit()
     return jsonify({"status":"Event Registration Added"}), 200
@@ -228,7 +228,7 @@ def insert_event_registration():
 @app.route("/api/event_registrations/<int:event_registration_id>",methods=["DELETE"])
 def remove_event_registration(event_registration_id):
     try:
-        Event_registration.query.filter_by(id = event_registration_id).delete()
+        EventRegistration.query.filter_by(id = event_registration_id).delete()
         db.session.commit()
         return jsonify({"status":"success"}), 200
     except:

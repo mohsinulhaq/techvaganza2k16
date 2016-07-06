@@ -2,6 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_assets import Environment, Bundle
+from flask.ext.login import LoginManager
+
 
 # Create an Instance of Flask
 app = Flask(__name__)
@@ -39,3 +41,6 @@ toolbar = DebugToolbarExtension(app)
 # Create an instance of SQLAlchemy
 db = SQLAlchemy(app)
 from app import views, models, api
+
+login_manager = LoginManager()
+login_manager.init_app(app)

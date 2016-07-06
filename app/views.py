@@ -4,6 +4,7 @@ from app import app, db
 from app.models import User, Event
 from app.forms import RegistrationForm
 from htmlmin.minify import html_minify
+from flask.ext.login import login_user , logout_user , current_user , login_required
 
 # -----------------------------------------------------------------------------------------
 #     Admin Routes
@@ -82,11 +83,29 @@ def register():
     return html_minify(render_template('register.html'))
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return html_minify(render_template('login.html'))
+    username = request.form['username']
+    password = request.form['password']
+    registered_user = User.query.filter_by(username=username,
+                                           password=password).first()
+    if registered_user is None:
+        flash('Username or Password is invalid')
+        return html_minify(render_template('login.html'))
+    login_user(registered_user)
+    flash('Logged in successfully')
+    return html_minify(render_template('index.html'))
+
+
 @app.route('/events/', methods=['GET'])
 @app.route('/events/<int:page>', methods=['GET'])
 def events(page=1):
-    pagination = Event.query.paginate(page, app.config['RESULTS_PER_PAGE'], False)
-    return html_minify(render_template('events/events.html', pagination=pagination))
+    pagination = Event.query.paginate(page, app.config['RESULTS_PER_PAGE'],
+                                      False)
+    return html_minify(render_template('events/events.html',
+                                       pagination=pagination))
 
 
 @app.route('/events/<slug>', methods=['GET'])
