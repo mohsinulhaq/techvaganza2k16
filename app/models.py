@@ -64,6 +64,7 @@ class Event(db.Model):
         self.slug = slug
         self.body = body
 
+
 # -----------------------------------------------------------------------------------------
 #     'Event Registrations' table
 # -----------------------------------------------------------------------------------------
@@ -71,17 +72,18 @@ class Event(db.Model):
 class Event_registration(db.Model):
     __tablename__ = "event_registrations"
 
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     event_id = db.Column(db.Integer, db.ForeignKey("events.id"))
 
-    def __init__(self, user_id,event_id):
+    def __init__(self, user_id, event_id):
         self.user_id = user_id
         self.event_id = event_id
 
-#-------------------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------------------
 #      'Workshops' table
-#-------------------------------------------------------------------------------------------
+# -------------------------------------------------------------------------------------------
 
 class Workshop(db.Model):
     __tablename__ = 'workshops'
@@ -98,18 +100,19 @@ class Workshop(db.Model):
         self.slug = slug
         self.body = body
 
-#--------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
 #       'Workshop' Registrations table
-#--------------------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------------------
+
 
 class Workshop_registration(db.Model):
     __tablename__ = "workshop_registrations"
 
-    id = db.Column(db.Integer, primary_key = True)
+    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     workshop_id = db.Column(db.Integer, db.ForeignKey("workshops.id"))
 
-    def __init__(self, user_id,workshop_id):
+    def __init__(self, user_id, workshop_id):
         self.user_id = user_id
         self.workshop_id = workshop_id
 
