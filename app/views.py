@@ -15,7 +15,6 @@ login_manager.init_app(app)
 #     Admin Routes
 # -----------------------------------------------------------------------------------------
 
-
 @app.route('/admin/')
 def admin_dashboard():
     return html_minify(render_template('admin/base.html'))
