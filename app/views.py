@@ -126,8 +126,10 @@ def events(page=1):
                                        pagination=pagination))
 
 
-@app.route('/events/<slug>', methods=['GET'])
+@app.route('/events/<slug>', methods=['GET', 'POST'])
 def event(slug):
+    if request.method == 'POST':
+        pass
     event = Event.query.filter_by(slug=slug).first()
     return html_minify(render_template('events/event.html', event=event))
 
