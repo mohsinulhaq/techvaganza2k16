@@ -23,6 +23,17 @@
                 <label>Password</label>
                 <input type="password" class="form-control" placeholder="Password" name="password">
 
+                <p>
+                <label class="checkbox checkbox-red" for="remember_me">
+                  <span class="icons">
+                    <span class="first-icon fa fa-square fa-base"></span>
+                    <span class="second-icon fa fa-check-square fa-base"></span>
+                  </span>
+                  <input type="checkbox" id="remember_me" name="remember_me" data-toggle="checkbox">
+                  Remember Me
+                </label>
+                </p>
+
                 <input class="btn btn-danger btn-block" type="submit" value="Login">
 
               </form>
@@ -42,6 +53,6 @@
 {% endblock %}
 
 {% block scripts %}
-  <script src="{{ url_for('static', filename='js/ct-paper-radio.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/ct-paper-checkbox.js') }}"></script>
   <script src="{{ url_for('static', filename='js/ct-paper.js') }}"></script>
 {% endblock %}
