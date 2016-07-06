@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+    User Name
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <div class="register-background">
+            <div class="filter-black"></div>
+                <div class="container">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="housekeeping-well" >
+
+                        {# Body goes here.#}
+
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Bottom Text -->
+            <br><br><br><br><br>
+            <div class="footer register-footer text-center">
+                <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src={{ url_for('static', filename='js/ct-paper.js') }}></script>
+
+{% endblock %}

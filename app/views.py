@@ -94,6 +94,15 @@ def event(slug):
     event = Event.query.filter_by(slug=slug).first()
     return html_minify(render_template('events/event.html', event=event))
 
+# -----------------------------------------------------------------------------------------
+#     User Routes
+# -----------------------------------------------------------------------------------------
+
+
+@app.route('/user/', methods=['GET'])
+def user():
+    return html_minify(render_template('users/user.html'))
+
 
 # -----------------------------------------------------------------------------------------
 #     Housekeeping Routes
