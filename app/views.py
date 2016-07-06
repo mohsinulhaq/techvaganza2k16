@@ -4,11 +4,16 @@ from app import app, db
 from app.models import User, Event
 from app.forms import RegistrationForm
 from htmlmin.minify import html_minify
+from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask.ext.login import LoginManager
+
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 # -----------------------------------------------------------------------------------------
 #     Admin Routes
 # -----------------------------------------------------------------------------------------
-
 
 @app.route('/admin/')
 def admin_dashboard():
@@ -82,17 +87,60 @@ def register():
     return html_minify(render_template('register.html'))
 
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return html_minify(render_template('login.html'))
+    email = request.form['email']
+    password = request.form['password']
+    registered_user = User.query.filter_by(email=email,
+                                           password=password).first()
+    if registered_user is None:
+        flash('Username or Password is invalid')
+        return html_minify(render_template('login.html'))
+    remember_me = False
+    if 'remember_me' in request.form:
+        remember_me = True
+    login_user(registered_user, remember=remember_me)
+    flash('Logged in successfully')
+    return html_minify(render_template('users/user.html'))
+
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return html_minify(render_template('index.html'))
+
+
 @app.route('/events/', methods=['GET'])
 @app.route('/events/<int:page>', methods=['GET'])
 def events(page=1):
-    pagination = Event.query.paginate(page, app.config['RESULTS_PER_PAGE'], False)
-    return html_minify(render_template('events/events.html', pagination=pagination))
+    pagination = Event.query.paginate(page, app.config['RESULTS_PER_PAGE'],
+                                      False)
+    return html_minify(render_template('events/events.html',
+                                       pagination=pagination))
 
 
-@app.route('/events/<slug>', methods=['GET'])
+@app.route('/events/<slug>', methods=['GET', 'POST'])
 def event(slug):
+    if request.method == 'POST':
+        pass
     event = Event.query.filter_by(slug=slug).first()
     return html_minify(render_template('events/event.html', event=event))
+
+# -----------------------------------------------------------------------------------------
+#     User Routes
+# -----------------------------------------------------------------------------------------
+
+
+@app.route('/user/', methods=['GET'])
+def user():
+    return html_minify(render_template('users/user.html'))
 
 
 # -----------------------------------------------------------------------------------------

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{ event.title }}
+    {{ current_user.name }}
 {% endblock %}
 
 {% block content %}
@@ -13,18 +13,9 @@
                     <div class="col-md-10 col-md-offset-1">
                         <div class="housekeeping-well" >
 
-                            <h2 class="animated flip" style="color: #51658e">{{ event.title }}</h2>
+                        {# Body goes here.#}
+                          <h1>{{ current_user.name }}</h1>
 
-                            <hr>
-                            <section class="animated slideInUp">
-
-                                {{ event.body | safe}}
-
-                            </section>
-                          <br>
-                          <div class="row text-center">
-                            <a href="#" class="btn btn-danger">Register</a>
-                          </div>
                         </div>
                     </div>
                 </div>

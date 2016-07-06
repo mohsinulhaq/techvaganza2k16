@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block content %}
+  <div class="wrapper">
+    <div class="register-background">
+      <div class="filter-black"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+            <div class="register-card">
+
+              <h3 class="title animated infinite pulse">Login</h3>
+
+              <form class="register-form" method="POST" action="#">
+
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Email" name="email" required>
+
+                <label>Password</label>
+                <input type="password" class="form-control" placeholder="Password" name="password">
+
+                <p>
+                <label class="checkbox checkbox-red" for="remember_me">
+                  <span class="icons">
+                    <span class="first-icon fa fa-square fa-base"></span>
+                    <span class="second-icon fa fa-check-square fa-base"></span>
+                  </span>
+                  <input type="checkbox" id="remember_me" name="remember_me" data-toggle="checkbox">
+                  Remember Me
+                </label>
+                </p>
+
+                <input class="btn btn-danger btn-block" type="submit" value="Login">
+
+              </form>
+              <div class="forgot">
+                <a href="#" class="btn btn-simple btn-danger">Forgot password?</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer register-footer text-center">
+        <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/ct-paper-checkbox.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/ct-paper.js') }}"></script>
+{% endblock %}

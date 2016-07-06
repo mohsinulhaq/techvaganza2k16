@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_assets import Environment, Bundle
 
+
 # Create an Instance of Flask
 app = Flask(__name__)
 
