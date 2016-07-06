@@ -45,7 +45,11 @@
         <li><a href="{{ url_for('events') }}" class="btn btn-simple">Events</a></li>
         <li><a href="{{ url_for('housekeeping', page = 'about') }}" class="btn btn-simple">About Us</a></li>
         <li><a href="{{ url_for('housekeeping', page = 'contact') }}" class="btn btn-simple">Contact Us</a></li>
-        <li><a href="#" class="btn btn-simple">Login</a></li>
+        {% if current_user.is_authenticated %}
+          <li><a href="{{ url_for('logout') }}" class="btn btn-simple">Logout</a></li>
+        {% else %}
+          <li><a href="{{ url_for('login') }}" class="btn btn-simple">Login</a></li>
+        {% endif %}
       </ul>
     </div>
   </div>
