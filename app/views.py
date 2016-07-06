@@ -87,16 +87,16 @@ def register():
 def login():
     if request.method == 'GET':
         return html_minify(render_template('login.html'))
-    username = request.form['username']
+    email = request.form['email']
     password = request.form['password']
-    registered_user = User.query.filter_by(username=username,
+    registered_user = User.query.filter_by(email=email,
                                            password=password).first()
     if registered_user is None:
         flash('Username or Password is invalid')
         return html_minify(render_template('login.html'))
     login_user(registered_user)
     flash('Logged in successfully')
-    return html_minify(render_template('index.html'))
+    return html_minify(render_template('users/user.html'))
 
 
 @app.route('/events/', methods=['GET'])
