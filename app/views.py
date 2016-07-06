@@ -4,7 +4,12 @@ from app import app, db
 from app.models import User, Event
 from app.forms import RegistrationForm
 from htmlmin.minify import html_minify
-from flask.ext.login import login_user , logout_user , current_user , login_required
+from flask.ext.login import login_user, logout_user, current_user, login_required
+from flask.ext.login import LoginManager
+
+
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 # -----------------------------------------------------------------------------------------
 #     Admin Routes
@@ -97,6 +102,17 @@ def login():
     login_user(registered_user)
     flash('Logged in successfully')
     return html_minify(render_template('users/user.html'))
+
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return html_minify(render_template('index.html'))
 
 
 @app.route('/events/', methods=['GET'])
