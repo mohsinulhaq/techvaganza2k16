@@ -1,5 +1,5 @@
 import os
-from flask import render_template, flash, request, redirect
+from flask import render_template, flash, request, redirect, abort
 from app import app, db
 from app.models import User, Event, Workshop
 from app.forms import RegistrationForm
@@ -10,6 +10,7 @@ from flask.ext.login import LoginManager
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 # -----------------------------------------------------------------------------------------
 #     Admin Routes
@@ -172,7 +173,7 @@ def housekeeping(page):
     try:
         return html_minify(render_template('housekeeping/' + page + '.html'))
     except Exception:
-        return "404"
+        abort(404)
 
 
 # -----------------------------------------------------------------------------------------
