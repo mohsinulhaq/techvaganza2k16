@@ -1,7 +1,7 @@
 import os
 from flask import render_template, flash, request, redirect
 from app import app, db
-from app.models import User, Event
+from app.models import User, Event, Workshop
 from app.forms import RegistrationForm
 from htmlmin.minify import html_minify
 from flask.ext.login import login_user, logout_user, current_user, login_required
@@ -133,10 +133,27 @@ def event(slug):
     event = Event.query.filter_by(slug=slug).first()
     return html_minify(render_template('events/event.html', event=event))
 
+
+@app.route('/workshops/', methods=['GET'])
+@app.route('/workshops/<int:page>', methods=['GET'])
+def workshops(page=1):
+    pagination = Workshop.query.paginate(page, app.config['RESULTS_PER_PAGE'],
+                                         False)
+    return html_minify(render_template('workshops/workshops.html',
+                                       pagination=pagination))
+
+
+@app.route('/workshops/<slug>', methods=['GET', 'POST'])
+def workshop(slug):
+    if request.method == 'POST':
+        pass
+    workshop = Workshop.query.filter_by(slug=slug).first()
+    return html_minify(render_template('workshops/workshop.html', workshop=workshop))
+
+
 # -----------------------------------------------------------------------------------------
 #     User Routes
 # -----------------------------------------------------------------------------------------
-
 
 @app.route('/user/', methods=['GET'])
 def user():

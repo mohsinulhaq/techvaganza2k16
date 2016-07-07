@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ workshop.title }}
+{% endblock %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <div class="register-background">
+            <div class="filter-black"></div>
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="housekeeping-well" >
+
+                          <ol class="breadcrumb" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
+                            <li><a href="{{ url_for('index') }}">Home</a></li>
+                            <li><a href="{{ url_for('workshops') }}">Workshops</a></li>
+                            <li class="active">{{ workshop.title }}</li>
+                          </ol>
+
+                          <div style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
+                            <h2 class="animated flip" style="color: #51658e">{{ workshop.title }}</h2>
+                          </div>
+
+                          <hr>
+                          <section class="animated slideInUp" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
+                              {{ workshop.body | safe}}
+                          </section>
+
+                          <br>
+                          <div class="text-center">
+                            <a href="#" class="btn btn-danger">Register</a>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+            <!-- Bottom Text -->
+            <br><br><br><br><br>
+            <div class="footer register-footer text-center">
+                <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src={{ url_for('static', filename='js/ct-paper.js') }}></script>
+{% endblock %}
