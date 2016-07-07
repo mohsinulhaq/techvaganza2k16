@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{ event.title }}
+    {{ workshop.title }}
 {% endblock %}
 
 {% block content %}
@@ -15,17 +15,17 @@
 
                           <ol class="breadcrumb" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
                             <li><a href="{{ url_for('index') }}">Home</a></li>
-                            <li><a href="{{ url_for('events') }}">Events</a></li>
-                            <li class="active">{{ event.title }}</li>
+                            <li><a href="{{ url_for('workshops') }}">Workshops</a></li>
+                            <li class="active">{{ workshop.title }}</li>
                           </ol>
 
                           <div style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
-                            <h2 class="animated flip" style="color: #51658e">{{ event.title }}</h2>
+                            <h2 class="animated flip" style="color: #51658e">{{ workshop.title }}</h2>
                           </div>
 
                           <hr>
                           <section class="animated slideInUp" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
-                              {{ event.body | safe}}
+                              {{ workshop.body | safe}}
                           </section>
 
                           <br>

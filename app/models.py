@@ -1,10 +1,10 @@
 from app import db
 from wtforms import Form, BooleanField, TextField, PasswordField, validators
 
+
 # -----------------------------------------------------------------------------------------
 #     'users' table
 # -----------------------------------------------------------------------------------------
-
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -49,7 +49,6 @@ class User(db.Model):
 # -----------------------------------------------------------------------------------------
 #     'notifications' table
 # -----------------------------------------------------------------------------------------
-
 
 class Notification(db.Model):
     __tablename__ = 'notifications'

@@ -203,7 +203,7 @@ def get_event_registrations():
 # GET method to retrieve a event_registration details, given its id
 @app.route("/api/event_registrations/<int:event_registration_id>", methods=["GET"])
 def get_event_registration(event_registration_id):
-    res = EventRegistration.query.filter_by(id = event_registration_id).all()
+    res = EventRegistration.query.filter_by(id=event_registration_id).all()
     registrations = []
     if len(res) == 0:
         return jsonify(registrations)

@@ -20,6 +20,12 @@
     .housekeeping-well > * {
       color: #f2efe7;
     }
+    .btn {
+      border-radius: 0;
+    }
+    .dropdown-menu > li > a {
+
+    }
   </style>
 
   {% block styles %}{% endblock %}
@@ -28,7 +34,7 @@
 
 <body>
 
-<nav class="navbar navbar-ct-transparent navbar-fixed-top" id="register-navbar" style="z-index: 9999;">
+<nav class="navbar navbar-ct-transparent navbar-fixed-top" id="register-navbar" style="z-index: 9999; margin-bottom: 3%;">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation">
@@ -42,11 +48,24 @@
 
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ url_for('events') }}" class="btn btn-simple">Events</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Activities <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a style="color: #0f0f0f;" href="{{ url_for('events') }}">Events</a></li>
+            <li><a style="color: #0f0f0f;" href="{{ url_for('workshops') }}">Workshops</a></li>
+          </ul>
+        </li>
         <li><a href="{{ url_for('housekeeping', page = 'about') }}" class="btn btn-simple">About Us</a></li>
         <li><a href="{{ url_for('housekeeping', page = 'contact') }}" class="btn btn-simple">Contact Us</a></li>
         {% if current_user.is_authenticated %}
-          <li><a href="{{ url_for('logout') }}" class="btn btn-simple">Logout</a></li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">{{ current_user.name }} <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a style="color: #0f0f0f;" href="{{ url_for('user') }}">Profile</a></li>
+              <li class="divider"></li>
+              <li><a style="color: #0f0f0f;" href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+          </li>
         {% else %}
           <li><a href="{{ url_for('login') }}" class="btn btn-simple">Login</a></li>
         {% endif %}
