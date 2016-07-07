@@ -10,11 +10,18 @@
         <div class="register-background">
             <div class="filter-black"></div>
                 <div class="container">
-                    <div class="col-md-10 col-md-offset-1">
+                    <div class="col-md-12">
                         <div class="housekeeping-well" >
                             <section class="animated slideInUp">
+                                <ol class="breadcrumb" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
+                                  <li><a href="{{ url_for('events') }}">Home</a></li>
+                                  <li class="active">Events</li>
+                                </ol>
+                                <hr>
+                                <br>
 
                                 {% for event in pagination.items %}
+                                  <div class="" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
                                     <a href="{{ url_for('event', slug = event.slug) }}">
                                         <h3 style="color: #51658e">{{ event.title }}</h3>
                                     </a>
@@ -22,6 +29,8 @@
                                         <em>{{ event.description }}</em>
                                     </p>
                                     <br>
+                                  </div>
+                                  <br>
                                 {% endfor %}
 
                                 <ul class="pagination">
@@ -45,7 +54,6 @@
                                         <a href="{{ url_for('events', page = pagination.next_num) }}">Next &raquo;</a>
                                     {% endif %}
                                 </ul>
-
                             </section>
                         </div>
                     </div>
