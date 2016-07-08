@@ -1,10 +1,8 @@
 from app import db
-from wtforms import Form, BooleanField, TextField, PasswordField, validators
-
-
 # -----------------------------------------------------------------------------------------
 #     'users' table
 # -----------------------------------------------------------------------------------------
+
 
 class User(db.Model):
     __tablename__ = 'users'

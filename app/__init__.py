@@ -3,7 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_assets import Environment, Bundle
 
-
 # Create an Instance of Flask
 app = Flask(__name__)
 
@@ -12,6 +11,9 @@ app.config.from_object('config')
 
 # Create an instance of SQLAlchemy
 db = SQLAlchemy(app)
+
+# Flask Debug Toolbar
+toolbar = DebugToolbarExtension(app)
 
 # Bundle css and js into minified forms
 assets = Environment(app)
@@ -34,9 +36,10 @@ bundles = {
 }
 assets.register(bundles)
 
-# Flask Debug Toolbar
-toolbar = DebugToolbarExtension(app)
+from .views import admin, general, user, housekeeping
 
-# Create an instance of SQLAlchemy
-db = SQLAlchemy(app)
-from app import views, models, api
+# register blueprints
+app.register_blueprint(admin.admin, url_prefix="/admin")
+app.register_blueprint(general.general, url_prefix="")
+app.register_blueprint(user.user, url_prefix="")
+app.register_blueprint(housekeeping.housekeeping, url_prefix="")
