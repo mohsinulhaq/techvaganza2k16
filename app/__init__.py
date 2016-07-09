@@ -36,7 +36,7 @@ bundles = {
 }
 assets.register(bundles)
 
-from .views import admin, general, user, housekeeping
+from views import admin, general, user, housekeeping
 
 # register blueprints
 app.register_blueprint(admin.admin, url_prefix="/admin")
