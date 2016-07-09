@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, flash, request
+from flask import Blueprint, render_template, flash, request, redirect, url_for
 from app import app, db
 from app.models import User, Event, Workshop
 from flask.ext.login import LoginManager
@@ -96,3 +96,8 @@ def workshop(slug):
     workshop = Workshop.query.filter_by(slug=slug).first()
     return html_minify(
         render_template('workshops/workshop.html', workshop=workshop))
+
+
+@general.route('/user/', methods=['GET'])
+def user():
+    return html_minify(render_template('users/user.html'))
