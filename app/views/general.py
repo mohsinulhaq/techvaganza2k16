@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for
+from flask import Blueprint, render_template, flash, request
 from app import app, db
 from app.models import User, Event, Workshop
 from flask.ext.login import LoginManager
 from flask.ext.login import login_user, logout_user
 from htmlmin.minify import html_minify
+from flask.ext.mail import Mail, Message
 
 general = Blueprint('general', __name__)
 login_manager = LoginManager()
@@ -101,3 +102,4 @@ def workshop(slug):
 @general.route('/user/', methods=['GET'])
 def user():
     return html_minify(render_template('users/user.html'))
+
