@@ -1,4 +1,5 @@
 from app import db
+
 # -----------------------------------------------------------------------------------------
 #     'users' table
 # -----------------------------------------------------------------------------------------
@@ -42,6 +43,18 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %r>' % self.name
+
+
+class PasswordReset(db.Model):
+    __tablename__ = 'password_resets'
+
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(255))
+    token = db.Column(db.String(128))
+
+    def __init__(self, email, token):
+        self.email = email
+        self.token = token
 
 
 # -----------------------------------------------------------------------------------------
@@ -113,10 +126,10 @@ class Workshop(db.Model):
         self.slug = slug
         self.body = body
 
+
 # --------------------------------------------------------------------------------------------
 #       'Workshop' Registrations table
 # --------------------------------------------------------------------------------------------
-
 
 class WorkshopRegistration(db.Model):
     __tablename__ = "workshop_registrations"
@@ -128,5 +141,3 @@ class WorkshopRegistration(db.Model):
     def __init__(self, user_id, workshop_id):
         self.user_id = user_id
         self.workshop_id = workshop_id
-
-# ------------------------------------    More Models to be added in future   ------------------------------------#
