@@ -53,6 +53,20 @@ def login():
     return html_minify(render_template('users/user.html'))
 
 
+@general.route('/login/forgot-password/', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        pass
+    return html_minify(render_template('forgot-password.html'))
+
+
+@general.route('/login/reset-password/<token>/<int:user_id>', methods=['GET', 'POST'])
+def reset_password(token, user_id):
+    if request.method == 'POST':
+        pass
+    return html_minify(render_template('reset-password.html'))
+
+
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
