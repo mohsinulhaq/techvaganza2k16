@@ -12,3 +12,11 @@ DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 # For pagination
 RESULTS_PER_PAGE = 5
+
+# For mail
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USE_TLS = False
+MAIL_USE_SSL = True
+MAIL_USERNAME = 'techvaganza2k16@gmail.com'
+MAIL_PASSWORD = 'wtforms2k16'
