@@ -151,6 +151,17 @@ def workshop(slug):
     workshop = Workshop.query.filter_by(slug=slug).first()
     return html_minify(render_template('workshops/workshop.html', workshop=workshop))
 
+# -----------------------------------------------------------------------------------------
+#     Contact
+# -----------------------------------------------------------------------------------------
+
+@app.route('/contact/', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        # TODO SEND MAIL
+        flash('Message Sent!')
+    return html_minify(render_template('contact.html'))
+
 
 # -----------------------------------------------------------------------------------------
 #     User Routes
