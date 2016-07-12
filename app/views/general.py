@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, flash, request, url_for
+from flask import Blueprint, render_template, flash, request, url_for, redirect
 from app import app, db
 from app.models import User, Event, Workshop, PasswordReset
 from flask.ext.login import LoginManager
@@ -11,6 +11,11 @@ import string
 general = Blueprint('general', __name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 @general.route('/', methods=['GET'])
@@ -33,6 +38,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Registration Successful!')
+        return redirect(url_for('.index'))
     return html_minify(render_template('register.html'))
 
 
@@ -46,7 +52,7 @@ def login():
                                            password=password).first()
     if registered_user is None:
         flash('Username or Password is invalid')
-        return html_minify(render_template('login.html'))
+        return redirect(url_for('.login'))
     remember_me = False
     if 'remember_me' in request.form:
         remember_me = True
@@ -105,14 +111,14 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-@general.route('/logout/')
+@general.route('/logout/', methods=['GET'])
 def logout():
     logout_user()
-    return html_minify(render_template('index.html'))
+    return redirect(url_for('.index'))
 
 
 @general.route('/events/', methods=['GET'])
-@general.route('/events/<int:page>', methods=['GET'])
+@general.route('/events/<int:page>/', methods=['GET'])
 def events(page=1):
     pagination = Event.query.paginate(page, app.config['RESULTS_PER_PAGE'],
                                       False)
@@ -120,7 +126,7 @@ def events(page=1):
                                        pagination=pagination))
 
 
-@general.route('/events/<slug>', methods=['GET', 'POST'])
+@general.route('/events/<slug>/', methods=['GET', 'POST'])
 def event(slug):
     if request.method == 'POST':
         pass
@@ -129,7 +135,7 @@ def event(slug):
 
 
 @general.route('/workshops/', methods=['GET'])
-@general.route('/workshops/<int:page>', methods=['GET'])
+@general.route('/workshops/<int:page>/', methods=['GET'])
 def workshops(page=1):
     pagination = Workshop.query.paginate(page, app.config['RESULTS_PER_PAGE'],
                                          False)
@@ -137,7 +143,7 @@ def workshops(page=1):
                                        pagination=pagination))
 
 
-@general.route('/workshops/<slug>', methods=['GET', 'POST'])
+@general.route('/workshops/<slug>/', methods=['GET', 'POST'])
 def workshop(slug):
     if request.method == 'POST':
         pass

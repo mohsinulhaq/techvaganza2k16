@@ -39,7 +39,7 @@ class User(db.Model):
         return False
 
     def get_id(self):
-        return unicode(self.id)
+        return str(self.id)
 
     def __repr__(self):
         return '<User %r>' % self.name
@@ -86,8 +86,8 @@ class Event(db.Model):
 
     def __init__(self, title, slug, description, body):
         self.title = title
-        self.description = description
         self.slug = slug
+        self.description = description
         self.body = body
 
 

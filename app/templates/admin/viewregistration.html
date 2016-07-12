@@ -13,12 +13,16 @@
           <td>{{ user.name }}</td>
         </tr>
         <tr>
+          <th>Email</th>
+          <td>{{ user.email }}</td>
+        </tr>
+        <tr>
           <th>Cell</th>
           <td>{{ user.cell }}</td>
         </tr>
         <tr>
-          <th>Email</th>
-          <td>{{ user.email }}</td>
+          <th>Gender</th>
+          <td>{{ user.gender }}</td>
         </tr>
         <tr>
           <th>College</th>
@@ -31,10 +35,6 @@
         <tr>
           <th>Branch</th>
           <td>{{ user.branch }}</td>
-        </tr>
-        <tr>
-          <th>Gender</th>
-          <td>{% filter upper %}{{ user.gender }}{% endfilter %}</td>
         </tr>
       </table>
     </div>
