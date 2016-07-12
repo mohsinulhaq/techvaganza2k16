@@ -1,9 +1,12 @@
-from flask import Blueprint, render_template, flash, request, redirect, url_for
+from flask import Blueprint, render_template, flash, request, url_for, redirect
 from app import app, db
-from app.models import User, Event, Workshop
+from app.models import User, Event, Workshop, PasswordReset
 from flask.ext.login import LoginManager
 from flask.ext.login import login_user, logout_user
 from htmlmin.minify import html_minify
+from flask.ext.mail import Mail, Message
+import random
+import string
 
 general = Blueprint('general', __name__)
 login_manager = LoginManager()
@@ -56,6 +59,56 @@ def login():
     login_user(registered_user, remember=remember_me)
     flash('Logged in successfully')
     return html_minify(render_template('users/user.html'))
+
+
+@general.route('/login/forgot-password/', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        user = User.query.filter_by(email=request.form['email']).first()
+        if user:
+            token = ''.join([random.choice(string.ascii_letters + string.digits) for n in xrange(64)])
+            old_password_reset = PasswordReset.query.filter_by(email=request.form['email']).first()
+            if old_password_reset:
+                db.session.delete(old_password_reset)
+                db.session.commit()
+            password_reset = PasswordReset(request.form['email'], token)
+            db.session.add(password_reset)
+            db.session.commit()
+            msg = Message(subject='Techvaganza 2k16 : Password Reset',
+                          sender='techvaganza2k16@gmail.com',
+                          recipients=[request.form['email']]
+                          )
+            msg.body = "Reset your password : http://localhost:5000" + \
+                       url_for('general.reset_password', token=token, user_id=user.id)
+            Mail(app).send(msg)
+            flash("Password reset email sent, check your mail!")
+        else:
+            flash("Email doesn't exist!")
+    return html_minify(render_template('forgot-password.html'))
+
+
+@general.route('/login/reset-password/<token>/<int:user_id>', methods=['GET', 'POST'])
+def reset_password(token, user_id):
+    if request.method == 'POST':
+        user = User.query.filter_by(id=user_id).first()
+        password_reset = PasswordReset.query.filter_by(email=user.email).first()
+        if token == password_reset.token:
+            if request.form['password'] == request.form['confirm_password']:
+                # Just noticed, we haven't hashed passwords -_-
+                user.password = request.form['password']
+                db.session.delete(password_reset)
+                db.session.commit()
+                flash("Password changed successfully.")
+            else:
+                flash("Passwords don't match!")
+        else:
+            flash("Failure: Illegal token found.")
+    return html_minify(render_template('reset-password.html'))
+
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
 
 @general.route('/logout/', methods=['GET'])
