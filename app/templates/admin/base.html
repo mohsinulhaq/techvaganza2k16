@@ -1,3 +1,4 @@
+{% from "_snippets/_macros.html" import nav_link with context %}
 <!DOCTYPE html>
 <html>
 
@@ -19,9 +20,9 @@
   <h1 class="text-center"><a href="{{ url_for('general.index') }}" style="text-decoration: none; color: black;">Admin Dashboard</a></h1>
 </div>
 <ul class="nav nav-tabs nav-justified" style="margin-bottom: 10px;">
-  <li class="events"><a href="{{ url_for('admin.events') }}">Events</a></li>
-  <li class="notifications"><a href="{{ url_for('admin.notifications') }}">Notifications</a></li>
-  <li class="registrations"><a href="{{ url_for('admin.registrations') }}">Registrations</a></li>
+  {{ nav_link('admin.events', 'Events') }}
+  {{ nav_link('admin.notifications', 'Notifications') }}
+  {{ nav_link('admin.registrations', 'Registrations') }}
 </ul>
 <div class="container-fluid">
   {% block content %}{% endblock %}

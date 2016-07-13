@@ -1,8 +1,7 @@
 from flask import Blueprint, render_template, flash, request, url_for, redirect
 from app import app, db
 from app.models import User, Event, Workshop, PasswordReset
-from flask.ext.login import LoginManager
-from flask.ext.login import login_user, logout_user
+from flask_login import LoginManager, login_user, logout_user, login_required
 from htmlmin.minify import html_minify
 from flask.ext.mail import Mail, Message
 import random
@@ -11,6 +10,7 @@ import string
 general = Blueprint('general', __name__)
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = '.login'
 
 
 @login_manager.user_loader
@@ -58,7 +58,7 @@ def login():
         remember_me = True
     login_user(registered_user, remember=remember_me)
     flash('Logged in successfully')
-    return html_minify(render_template('users/user.html'))
+    return redirect(url_for('.user'))
 
 
 @general.route('/login/forgot-password/', methods=['GET', 'POST'])
@@ -153,5 +153,6 @@ def workshop(slug):
 
 
 @general.route('/user/', methods=['GET'])
+@login_required
 def user():
     return html_minify(render_template('users/user.html'))
