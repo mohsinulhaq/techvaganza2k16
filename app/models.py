@@ -15,8 +15,9 @@ class User(db.Model):
     cell = db.Column(db.String(255))
     gender = db.Column(db.String(6))
     college = db.Column(db.String(255))
-    batch = db.Column(db.Integer())
+    batch = db.Column(db.Integer)
     branch = db.Column(db.String(255))
+    email_confirmed = db.Column(db.Boolean, default=False, nullable=False)
 
     def __init__(self, password, name, email, cell, gender, college, batch,
                  branch):

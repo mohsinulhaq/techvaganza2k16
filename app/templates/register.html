@@ -17,23 +17,23 @@
 
               <form class="register-form" method="POST">
                 <label>Full Name</label>
-                <input type="text" class="form-control" name="name" placeholder="name">
+                <input type="text" class="form-control" name="name" placeholder="name" required>
 
                 <label>Email</label>
                 <input type="email" class="form-control" placeholder="Email" name="email" required>
 
                 <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password" name="password">
+                <input type="password" class="form-control" placeholder="Password" name="password" required>
 
                 <label>Phone No.</label>
-                <input type="number" class="form-control" placeholder="Cell no." name="cell">
+                <input type="number" class="form-control" placeholder="Cell no." name="cell" required>
 
                 <label class="radio">
                   <span class="icons">
                     <span class="first-icon fa fa-circle-o fa-base"></span>
                     <span class="second-icon fa fa-dot-circle-o fa-base"></span>
                   </span>
-                  <input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="MALE">
+                  <input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="MALE" required>
                   <i></i>Male
                 </label>
 
@@ -47,13 +47,13 @@
                 </label>
 
                 <label>College</label>
-                <input type="text" class="form-control" placeholder="College" name="college">
+                <input type="text" class="form-control" placeholder="College" name="college" required>
 
                 <label>Batch</label>
-                <input type="number" class="form-control" placeholder="Batch" name="batch">
+                <input type="number" class="form-control" placeholder="Batch" name="batch" required>
 
                 <label>Branch</label>
-                <input type="text" class="form-control" placeholder="Branch" name="branch">
+                <input type="text" class="form-control" placeholder="Branch" name="branch" required>
 
                 <input class="btn btn-danger btn-block" type="submit" value="Register">
 
