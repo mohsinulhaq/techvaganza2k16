@@ -1,7 +1,9 @@
 alembic==0.8.6
 Babel==2.3.4
+bcrypt==3.1.0
 beautifulsoup4==4.4.1
 blinker==1.4
+cffi==1.7.0
 click==6.6
 coverage==4.1
 cssmin==0.2.0
@@ -11,6 +13,7 @@ django-htmlmin==0.9.1
 Flask==0.11.1
 Flask-Assets==0.11
 Flask-Babel==0.11.1
+Flask-Bcrypt==0.7.1
 Flask-DebugToolbar==0.10.0
 Flask-Login==0.3.2
 Flask-Mail==0.9.1
@@ -42,6 +45,7 @@ passlib==1.6.5
 pathlib==1.0.1
 pbr==1.10.0
 pyactiveresource==2.1.2
+pycparser==2.14
 python-editor==1.0.1
 python-openid==2.2.5
 python3-openid==3.0.10
@@ -56,4 +60,3 @@ webassets==0.11.1
 Werkzeug==0.11.10
 Whoosh==2.7.4
 WTForms==2.1
-flask_bcrypt
