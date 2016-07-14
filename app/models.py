@@ -51,25 +51,6 @@ class User(db.Model):
 
 
 # -----------------------------------------------------------------------------------------
-#     'password_resets' table
-# -----------------------------------------------------------------------------------------
-
-class PasswordReset(db.Model):
-    __tablename__ = 'password_resets'
-
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(255))
-    token = db.Column(db.String(128))
-    created_on = db.Column(db.DateTime, server_default=db.func.now())
-    updated_on = db.Column(db.DateTime, server_default=db.func.now(),
-                           onupdate=db.func.now())
-
-    def __init__(self, email, token):
-        self.email = email
-        self.token = token
-
-
-# -----------------------------------------------------------------------------------------
 #     'notifications' table
 # -----------------------------------------------------------------------------------------
 

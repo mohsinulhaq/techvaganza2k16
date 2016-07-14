@@ -40,9 +40,11 @@ bundles = {
 }
 assets.register(bundles)
 
-from views import admin, general, housekeeping
+from views import admin, general, housekeeping, authentication
 
 # register blueprints
 app.register_blueprint(admin.admin, url_prefix="/admin")
 app.register_blueprint(general.general, url_prefix="")
 app.register_blueprint(housekeeping.housekeeping, url_prefix="")
+app.register_blueprint(authentication.authentication, url_prefix="")
+
