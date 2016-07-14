@@ -1,5 +1,5 @@
-from app import db
-
+from app import db, bcrypt
+from sqlalchemy.ext.hybrid import hybrid_property
 # -----------------------------------------------------------------------------------------
 #     'users' table
 # -----------------------------------------------------------------------------------------
@@ -9,8 +9,8 @@ class User(db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    password = db.Column(db.String(255))
     name = db.Column(db.String(255))
+    _password = db.Column(db.String(128))
     email = db.Column(db.String(255), unique=True)
     cell = db.Column(db.String(255))
     gender = db.Column(db.String(6))
@@ -19,16 +19,16 @@ class User(db.Model):
     branch = db.Column(db.String(255))
     email_confirmed = db.Column(db.Boolean, default=False, nullable=False)
 
-    def __init__(self, password, name, email, cell, gender, college, batch,
-                 branch):
-        self.password = password
-        self.name = name
-        self.email = email
-        self.cell = cell
-        self.gender = gender
-        self.college = college
-        self.batch = batch
-        self.branch = branch
+    @hybrid_property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def _set_password(self, plaintext):
+        self._password = bcrypt.generate_password_hash(plaintext)
+
+    def is_correct_password(self, plaintext):
+        return bcrypt.check_password_hash(self._password, plaintext)
 
     def is_authenticated(self):
         return True

@@ -20,3 +20,6 @@ MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 MAIL_USERNAME = 'techvaganza2k16@gmail.com'
 MAIL_PASSWORD = 'wtforms2k16'
+
+# number of times password is hashed
+BCRYPT_LOG_ROUNDS = 12
