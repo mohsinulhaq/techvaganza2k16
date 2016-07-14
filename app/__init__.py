@@ -2,12 +2,16 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
 from flask_assets import Environment, Bundle
+from flask_bcrypt import Bcrypt
 
 # Create an Instance of Flask
 app = Flask(__name__)
 
 # Include config from config.py
 app.config.from_object('config')
+
+# bcrypt encryption module
+bcrypt = Bcrypt(app)
 
 # Create an instance of SQLAlchemy
 db = SQLAlchemy(app)

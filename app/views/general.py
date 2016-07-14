@@ -17,8 +17,8 @@ ts = URLSafeTimedSerializer(app.config["SECRET_KEY"])
 
 
 @login_manager.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+def load_user(userid):
+    return User.query.filter(User.id == userid).first()
 
 
 @general.route('/', methods=['GET'])
@@ -46,14 +46,14 @@ def confirm_email(token):
 @general.route('/register/', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        user = User(request.form['password'],
-                    request.form['name'],
-                    request.form['email'],
-                    request.form['cell'],
-                    request.form['gender'],
-                    request.form['college'],
-                    request.form['batch'],
-                    request.form['branch'])
+        user = User(password=request.form['password'],
+                    name=request.form['name'],
+                    email=request.form['email'],
+                    cell=request.form['cell'],
+                    gender=request.form['gender'],
+                    college=request.form['college'],
+                    batch=request.form['batch'],
+                    branch=request.form['branch'])
         user.email_confirmed = False
         db.session.add(user)
         db.session.commit()
@@ -91,20 +91,21 @@ def login():
         return html_minify(render_template('login.html'))
     email = request.form['email']
     password = request.form['password']
-    registered_user = User.query.filter_by(email=email,
-                                           password=password).first()
+    registered_user = User.query.filter_by(email=email).first_or_404()
     if registered_user is None:
         flash('Username or Password is invalid')
         return redirect(url_for('.login'))
+
+    if not registered_user.is_correct_password(password):
+        flash('Username or Password is invalid')
+        return redirect(url_for('.login'))
+
     if not registered_user.email_confirmed:
         flash('Please confirm your email first.')
         return redirect(url_for('.login'))
 
-    remember_me = False
-    if 'remember_me' in request.form:
-        remember_me = True
+    remember_me = True if 'remember_me' in request.form else False
     login_user(registered_user, remember=remember_me)
-    flash('Welcome!')
     return redirect(url_for('.user'))
 
 
@@ -125,12 +126,12 @@ def forgot_password():
                           sender='techvaganza2k16@gmail.com',
                           recipients=[request.form['email']]
                           )
-            msg.body = "Reset your password : http://localhost:5000" + \
-                       url_for('general.reset_password', token=token, user_id=user.id)
+            msg.body = "Reset your password : " + \
+                       url_for('general.reset_password', token=token, user_id=user.id, _external=True)
             Mail(app).send(msg)
             flash("Password reset email sent, check your mail!")
         else:
-            flash("Email doesn't exist!")
+            flash("User doesn't exist!")
     return html_minify(render_template('forgot-password.html'))
 
 
