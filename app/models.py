@@ -45,19 +45,6 @@ class User(db.Model):
     def __repr__(self):
         return '<User %r>' % self.name
 
-
-class PasswordReset(db.Model):
-    __tablename__ = 'password_resets'
-
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(255))
-    token = db.Column(db.String(128))
-
-    def __init__(self, email, token):
-        self.email = email
-        self.token = token
-
-
 # -----------------------------------------------------------------------------------------
 #     'notifications' table
 # -----------------------------------------------------------------------------------------
