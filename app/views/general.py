@@ -171,7 +171,8 @@ def events(page=1):
     pagination = Event.query.paginate(page, app.config['RESULTS_PER_PAGE'],
                                       False)
     return html_minify(render_template('events/events.html',
-                                       pagination=pagination))
+                                       pagination=pagination,
+                                       entities="general.events"))
 
 
 @general.route('/events/<slug>/', methods=['GET', 'POST'])
@@ -188,7 +189,8 @@ def workshops(page=1):
     pagination = Workshop.query.paginate(page, app.config['RESULTS_PER_PAGE'],
                                          False)
     return html_minify(render_template('workshops/workshops.html',
-                                       pagination=pagination))
+                                       pagination=pagination,
+                                       entities="general.workshops"))
 
 
 @general.route('/workshops/<slug>/', methods=['GET', 'POST'])
