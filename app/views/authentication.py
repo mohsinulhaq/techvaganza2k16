@@ -142,7 +142,7 @@ def reset_with_token(token):
         user = User.query.filter_by(email=email).first_or_404()
         if request.form['password'] == request.form['confirm_password']:
             user.password = request.form['password']
-            db.session.add(user)
+            flash("Password changed successfully!")
             db.session.commit()
             return redirect(url_for('.login'))
         else:

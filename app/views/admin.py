@@ -9,19 +9,33 @@ admin = Blueprint('admin', __name__)
 
 @admin.route('/')
 def index():
-    return html_minify(render_template('admin/base.html'))
+    return html_minify(render_template('admin/registrations.html'))
 
 
-@admin.route('/events/', methods=['GET', 'POST'])
-def events():
+@admin.route('/activities/', methods=['GET', 'POST'])
+def activities():
     if request.method == 'POST':
-        event = Event(request.form['title'], request.form['slug'],
-                      request.form['description'], request.form['body'])
-        db.session.add(event)
-        db.session.commit()
-        flash('Event Upload Successful!')
-        return redirect(url_for('general.events'))
-    return html_minify(render_template('admin/events.html'))
+        if request.form['activity_type'] == "Event":
+            event = Event(request.form['title'],
+                          request.form['slug'],
+                          request.form['description'],
+                          request.form['body'])
+            db.session.add(event)
+            db.session.commit()
+            flash('Event Upload Successful!')
+            return redirect(url_for('general.events'))
+        elif request.form['activity_type'] == "Workshop":
+            workshop = Workshop(request.form['title'],
+                                request.form['slug'],
+                                request.form['description'],
+                                request.form['body'])
+            db.session.add(workshop)
+            db.session.commit()
+            flash('Workshop Upload Successful!')
+            return redirect(url_for('general.workshops'))
+        else:
+            flash("Activity type unknown!")
+    return html_minify(render_template('admin/activities.html'))
 
 
 @admin.route('/notifications/', methods=['GET', 'POST'])
@@ -51,4 +65,4 @@ def registrations():
 def view_registration(id):
     user = User.query.get(id)
     return html_minify(
-        render_template('admin/viewregistration.html', user=user))
+        render_template('admin/view-registration.html', user=user))

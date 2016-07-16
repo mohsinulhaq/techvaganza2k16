@@ -24,7 +24,8 @@ def index():
 @general.route('/events/', methods=['GET'])
 @general.route('/events/<int:page>', methods=['GET'])
 def events(page=1):
-    pagination = Event.query.paginate(page, app.config['RESULTS_PER_PAGE'],
+    pagination = Event.query.paginate(page,
+                                      app.config['RESULTS_PER_PAGE'],
                                       False)
     return html_minify(render_template('events/events.html',
                                        pagination=pagination,
@@ -42,7 +43,8 @@ def event(slug):
 @general.route('/workshops/', methods=['GET'])
 @general.route('/workshops/<int:page>', methods=['GET'])
 def workshops(page=1):
-    pagination = Workshop.query.paginate(page, app.config['RESULTS_PER_PAGE'],
+    pagination = Workshop.query.paginate(page,
+                                         app.config['RESULTS_PER_PAGE'],
                                          False)
     return html_minify(render_template('workshops/workshops.html',
                                        pagination=pagination,

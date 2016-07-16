@@ -20,20 +20,22 @@
                                 <hr>
                                 <br>
 
-                                {% for event in pagination.items %}
+                                {% for workshop in pagination.items %}
                                   <div class="" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
-                                    <a href="{{ url_for('general.workshop', slug = worshop.slug) }}">
+                                    <a href="{{ url_for('general.workshop', slug = workshop.slug) }}">
                                         <h3 style="color: #51658e">{{ workshop.title }}</h3>
                                     </a>
                                     <p style="color: #f2efe7">
-                                        <em>{{ worshop.description }}</em>
+                                        <em>{{ workshop.description }}</em>
                                     </p>
                                     <br>
                                   </div>
                                   <br>
                                 {% endfor %}
 
-                                {{ pagination_macro(entities, pagination) }}
+                                <div class="text-center">
+                                    {{ pagination_macro(entities, pagination) }}
+                                </div>
                             </section>
                         </div>
                     </div>
