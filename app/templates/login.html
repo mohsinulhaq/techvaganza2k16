@@ -21,24 +21,20 @@
                 <input type="email" class="form-control" placeholder="Email" name="email" required>
 
                 <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password" name="password">
+                <input type="password" class="form-control" placeholder="Password" name="password" required>
 
-                <p>
-                <label class="checkbox checkbox-red" for="remember_me">
-                  <span class="icons">
-                    <span class="first-icon fa fa-square fa-base"></span>
-                    <span class="second-icon fa fa-check-square fa-base"></span>
-                  </span>
-                  <input type="checkbox" id="remember_me" name="remember_me" data-toggle="checkbox">
+                <label class="checkbox checkbox-red">
+                  <input type="checkbox" name="remember-me" data-toggle="checkbox">
                   Remember Me
                 </label>
-                </p>
+
 
                 <input class="btn btn-danger btn-block" type="submit" value="Login">
 
               </form>
               <div class="forgot">
-                <a href="{{ url_for('authentication.reset_password') }}" class="btn btn-simple btn-danger">Forgot password?</a>
+                <a href="{{ url_for('authentication.reset_password') }}" class="btn btn-simple btn-danger">Forgot
+                  password?</a>
               </div>
             </div>
           </div>

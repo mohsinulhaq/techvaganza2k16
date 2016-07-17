@@ -19,8 +19,20 @@
                 <label>Full Name</label>
                 <input type="text" class="form-control" name="name" placeholder="name" required>
 
+
                 <label>Email</label>
-                <input type="email" class="form-control" placeholder="Email" name="email" required>
+                <div class="form-group">
+                  <input type="email" class="form-control email" placeholder="Email" name="email" autocomplete="off"
+                         required>
+                </div>
+
+                <div class="check-validation" style="display: none;">
+                  <i class="fa fa-cog fa-spin fa-lg" aria-hidden="true"></i>
+                  <i class="fa fa-check" aria-hidden="true" style="display: none; color: green;"></i>
+                  <div style="display: none; color:red;">
+                    <i class="fa fa-times" aria-hidden="true"></i>Account already exists
+                  </div>
+                </div>
 
                 <label>Password</label>
                 <input type="password" class="form-control" placeholder="Password" name="password" required>
@@ -33,7 +45,7 @@
                     <span class="first-icon fa fa-circle-o fa-base"></span>
                     <span class="second-icon fa fa-dot-circle-o fa-base"></span>
                   </span>
-                  <input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="MALE" required>
+                  <input type="radio" name="gender" data-toggle="radio" value="MALE" required>
                   <i></i>Male
                 </label>
 
@@ -42,7 +54,7 @@
                     <span class="first-icon fa fa-circle-o fa-base"></span>
                     <span class="second-icon fa fa-dot-circle-o fa-base"></span>
                   </span>
-                  <input type="radio" name="gender" data-toggle="radio" id="optionsRadios1" value="FEMALE">
+                  <input type="radio" name="gender" data-toggle="radio" value="FEMALE">
                   <i></i>Female
                 </label>
 
@@ -59,7 +71,8 @@
 
               </form>
               <div class="forgot">
-                <a href="#" class="btn btn-simple btn-danger">Forgot password?</a>
+                <a href="{{ url_for('authentication.reset_password') }}" class="btn btn-simple btn-danger">Forgot
+                  password?</a>
               </div>
             </div>
           </div>
@@ -76,4 +89,38 @@
 {% block scripts %}
   <script src="{{ url_for('static', filename='js/ct-paper-radio.js') }}"></script>
   <script src="{{ url_for('static', filename='js/ct-paper.js') }}"></script>
+  <script>
+    $('.email').focusout(function() {
+      if (this.checkValidity()) {
+        $.get({
+          beforeSend: function() {
+            $('.check-validation').show();
+            $('.fa-cog').show();
+          },
+          url: '/api/check-registration/' + $(this).val().trim(),
+          success: function(response) {
+            if (response.success) {
+              $('.email').parent().removeClass('has-success')
+                  .addClass('has-error');
+              $('.fa-cog').hide();
+              $('.fa-check').hide();
+              $('.fa-times').parent().show();
+            } else {
+              $('.email').parent().removeClass('has-error')
+                  .addClass('has-success');
+              $('.fa-cog').hide();
+              $('.fa-times').parent().hide();
+              $('.fa-check').show();
+            }
+            if (response.message) {
+              console.log(response.message);
+            }
+          }
+        });
+      } else {
+        $('.check-validation').hide();
+        $('.email').parent().removeClass('has-error has-success');
+      }
+    });
+  </script>
 {% endblock %}

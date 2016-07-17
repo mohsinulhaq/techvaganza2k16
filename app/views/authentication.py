@@ -96,7 +96,7 @@ def login():
         flash('Please confirm your email first.')
         return redirect(url_for('.login'))
 
-    remember_me = True if 'remember_me' in request.form else False
+    remember_me = True if 'remember-me' in request.form else False
     login_user(registered_user, remember=remember_me)
     return redirect(url_for('general.user'))
 

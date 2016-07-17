@@ -1,8 +1,8 @@
-# for creating json responses
-import json
-from flask import jsonify, abort, make_response, request
-from app import app, db, views, models
-from .models import Event, EventRegistration, User
+from flask import Blueprint, jsonify, abort, request
+from app import db
+from app.models import Event, EventRegistration, User
+
+api = Blueprint('api', __name__)
 
 
 # converts a SQLAlchemy result row into a standard python dictionary
@@ -13,13 +13,7 @@ def row2dict(row):
     return d
 
 
-# Returns the error as a json response
-@app.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
-
-
-@app.route("/api/users/<int:user_id>", methods=["GET"])
+@api.route("/users/<int:user_id>", methods=["GET"])
 def get_user(user_id):
     res = Event.query.filter_by(id=user_id).all()
     users = []
@@ -31,14 +25,14 @@ def get_user(user_id):
         return jsonify(users)
 
 
-@app.route("/api/users", methods=["POST"])
+@api.route("/users", methods=["POST"])
 def insert_user():
-    if not request.json or not 'enroll' in request.json or not 'password' in request.json\
-    or not 'college' in request.json or not 'email' in request.json:
+    if not request.json or 'enroll' not in request.json or 'password' not in \
+            request.json or 'college' not in request.json or 'email' not in request.json:
         abort(400)
 
     password = request.json.get('password', '')
-    name = request.json.get('name','')
+    name = request.json.get('name', '')
     email = request.json.get('email', '')
     cell = request.json.get('cell', '')
     gender = request.json.get('gender', '')
@@ -56,7 +50,7 @@ def insert_user():
 
 
 # PUT method to modify the details of a User
-@app.route("/api/users/<int:user_id>", methods=["PUT"])
+@api.route("/users/<int:user_id>", methods=["PUT"])
 def update_user(user_id):
         if 'password' in request.json:
             item = User.query.filter_by(id=user_id).first()
@@ -106,7 +100,7 @@ def update_user(user_id):
 
 
 # GET method to retrieve all the events registered
-@app.route("/api/events", methods=["GET"])
+@api.route("/events", methods=["GET"])
 def get_events():
     res = Event.query.all()
     events = []
@@ -119,7 +113,7 @@ def get_events():
 
 
 # GET method to retrieve a particular event given its id
-@app.route("/api/events/<int:event_id>")
+@api.route("/events/<int:event_id>")
 def get_event(event_id):
     res = Event.query.filter_by(id=event_id).all()
     events = []
@@ -132,9 +126,9 @@ def get_event(event_id):
 
 
 # add an event using the POST method
-@app.route("/api/events", methods=["POST"])
+@api.route("/events", methods=["POST"])
 def create_event():
-    if not request.json or not 'title' in request.json or not 'slug' in request.json:
+    if not request.json or 'title' not in request.json or 'slug' not in request.json:
         abort(400)
     event = Event(request.json['title'],
                   request.json['slug'],
@@ -146,7 +140,7 @@ def create_event():
 
 
 # update an event using the PUT method
-@app.route("/api/events/<int:event_id>", methods=["PUT"])
+@api.route("/events/<int:event_id>", methods=["PUT"])
 def update_event(event_id):
     if 'title' in request.json:
         item = Event.query.filter_by(id=event_id).first()
@@ -176,7 +170,7 @@ def update_event(event_id):
 
 
 # DELETE method to delete a particular event
-@app.route("/api/events/<int:event_id>", methods=["DELETE"])
+@api.route("/events/<int:event_id>", methods=["DELETE"])
 def delete_event(event_id):
     try:
         Event.query.filter_by(id=event_id).delete()
@@ -187,7 +181,7 @@ def delete_event(event_id):
 
 
 # GET method to retrieve all the registrations being done for events by users
-@app.route("/api/event_registrations", methods=["GET"])
+@api.route("/event_registrations", methods=["GET"])
 def get_event_registrations():
     res = EventRegistration.query.all()
     registrations = []
@@ -201,7 +195,7 @@ def get_event_registrations():
 
 
 # GET method to retrieve a event_registration details, given its id
-@app.route("/api/event_registrations/<int:event_registration_id>", methods=["GET"])
+@api.route("/event_registrations/<int:event_registration_id>", methods=["GET"])
 def get_event_registration(event_registration_id):
     res = EventRegistration.query.filter_by(id=event_registration_id).all()
     registrations = []
@@ -214,9 +208,9 @@ def get_event_registration(event_registration_id):
 
 
 # POST method to insert an event registration
-@app.route("/api/event_registrations", methods=["POST"])
+@api.route("/event_registrations", methods=["POST"])
 def insert_event_registration():
-    if not request.json or not 'user_id' in request.json or not 'event_id' in request.json:
+    if not request.json or 'user_id' not in request.json or 'event_id' not in request.json:
         abort(400)
     registration = EventRegistration(request.json['user_id'],
                                      request.json['event_id'])
@@ -226,7 +220,7 @@ def insert_event_registration():
 
 
 # DELETE method to delete and event registration
-@app.route("/api/event_registrations/<int:event_registration_id>", methods=["DELETE"])
+@api.route("/event_registrations/<int:event_registration_id>", methods=["DELETE"])
 def remove_event_registration(event_registration_id):
     try:
         EventRegistration.query.filter_by(id=event_registration_id).delete()
@@ -234,3 +228,15 @@ def remove_event_registration(event_registration_id):
         return jsonify({"status": "success"}), 200
     except:
         return jsonify({"status": "failed"})
+
+
+@api.route('/check-registration/<email>', methods=['GET'])
+def check_registration(email):
+    try:
+        user = User.query.filter_by(email=email).first()
+        if user:
+            return jsonify(success=True)
+        else:
+            return jsonify(success=False)
+    except Exception as e:
+        return jsonify(success=False, message=e)
