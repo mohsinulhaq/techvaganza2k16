@@ -51,4 +51,40 @@ class ContactRequest(Request):
         return validate, self.errors
 
 
+class RegisterRequest(Request):
+    """
+        Refers to the 'Register' form.
+    """
+    def validate(self, data):
+        validate = True
+
+        characters_regex = re.compile(self.rules['characters'])
+        numbers_regex = re.compile(self.rules['numbers'])
+        email_regex = re.compile(self.rules['email'])
+
+        if not characters_regex.match(data['name']):
+            validate = False
+            self.errors['name'] = 'Name can contain only characters'
+        if not email_regex.match(data['email']):
+            validate = False
+            self.errors['email'] = 'Not a proper email format'
+        if len(data['password']) < 8:
+            validate = False
+            self.errors['password'] = 'Password should be at least 8 characters long'
+        if not numbers_regex.match(data['cell']):
+            validate = False
+            self.errors['cell'] = 'Name can contain only characters'
+        if not characters_regex.match(data['college']):
+            validate = False
+            self.errors['college'] = 'College name can contain only characters'
+        if not numbers_regex.match(data['batch']):
+            validate = False
+            self.errors['batch'] = 'Input your college freshman year'
+        if not characters_regex.match(data['branch']):
+            validate = False
+            self.errors['branch'] = 'Branch name can contain only characters'
+
+        return validate, self.errors
+
+
 

@@ -15,7 +15,7 @@
 
               <h3 class="title animated infinite pulse">Sign Up</h3>
 
-              <form class="register-form" method="POST">
+              <form class="register-form" method="POST" novalidate>
                 <label>Full Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Name" required>
 
@@ -45,7 +45,7 @@
                     <span class="first-icon fa fa-circle-o fa-base"></span>
                     <span class="second-icon fa fa-dot-circle-o fa-base"></span>
                   </span>
-                  <input type="radio" name="gender" data-toggle="radio" value="MALE" required>
+                  <input type="radio" name="gender" data-toggle="radio" value="MALE" checked required>
                   <i></i>Male
                 </label>
 
@@ -54,7 +54,7 @@
                     <span class="first-icon fa fa-circle-o fa-base"></span>
                     <span class="second-icon fa fa-dot-circle-o fa-base"></span>
                   </span>
-                  <input type="radio" name="gender" data-toggle="radio" value="FEMALE">
+                  <input type="radio" name="gender" data-toggle="radio" value="FEMALE" required>
                   <i></i>Female
                 </label>
 

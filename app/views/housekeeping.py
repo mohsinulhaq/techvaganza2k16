@@ -24,7 +24,7 @@ def contact():
                               recipients=['techvaganza2k16@gmail.com'],
                               html=html
                               )
-                # Mail(app).send(msg)
+                Mail(app).send(msg)
                 flash("Mail sent, thanks for feedback!")
             else:
                 # TODO: Implements these in bootstrap/paperkit as individual form inputs field errors.
