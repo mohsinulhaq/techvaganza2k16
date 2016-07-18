@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="check-validation" style="display: none;">
-                  <i class="fa fa-cog fa-spin fa-lg" aria-hidden="true"></i>
+                  <i class="fa fa-cog fa-spin" aria-hidden="true"></i>
                   <i class="fa fa-check" aria-hidden="true" style="display: none; color: green;"></i>
                   <div style="display: none; color:red;">
                     <i class="fa fa-times" aria-hidden="true"></i>Account already exists
@@ -67,7 +67,7 @@
                 <label>Branch</label>
                 <input type="text" class="form-control" placeholder="Branch" name="branch" required>
 
-                <input class="btn btn-danger btn-block" type="submit" value="Register">
+                <input class="btn btn-danger btn-block register" type="submit" value="Register">
 
               </form>
               <div class="forgot">
@@ -101,16 +101,19 @@
           success: function(response) {
             if (response.success) {
               $('.email').parent().removeClass('has-success')
-                  .addClass('has-error');
+                                  .addClass('has-error');
               $('.fa-cog').hide();
               $('.fa-check').hide();
               $('.fa-times').parent().show();
+              $('.register').prop('disabled', true);
+
             } else {
               $('.email').parent().removeClass('has-error')
-                  .addClass('has-success');
+                                  .addClass('has-success');
               $('.fa-cog').hide();
               $('.fa-times').parent().hide();
               $('.fa-check').show();
+              $('.register').prop('disabled', false);
             }
             if (response.message) {
               console.log(response.message);
