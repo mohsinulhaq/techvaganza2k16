@@ -13,25 +13,26 @@
                     <div class="col-md-12">
                         <div class="housekeeping-well" >
 
-                          <ol class="breadcrumb" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
+                          <ol class="breadcrumb" style="background-color: rgba(0, 0, 0, 0.2); padding: 1%;">
                             <li><a href="{{ url_for('general.index') }}">Home</a></li>
                             <li><a href="{{ url_for('general.events') }}">Events</a></li>
                             <li class="active">{{ event.title }}</li>
                           </ol>
 
-                          <div style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
-                            <h2 class="animated flip" style="color: #51658e">{{ event.title }}</h2>
+                          <div style="background-color: rgba(0, 0, 0, 0.2); padding: 1%;">
+                            <h2 class="animated flip" style="color: #54718e;">{{ event.title }}</h2>
                           </div>
 
                           <hr>
-                          <section class="animated slideInUp" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
-                              {{ event.body | safe}}
-                          </section>
+                          <section class="animated slideInUp" style="background-color: rgba(0, 0, 0, 0.2); padding: 1%;">
 
-                          <br>
-                          <div class="text-center">
-                            <a href="#" class="btn btn-danger">Register</a>
-                          </div>
+                              {{ event.body | safe}}
+
+                              <br>
+                              <div class="text-center">
+                                <a href="#" class="btn btn-danger">Register</a>
+                              </div>
+                          </section>
 
                         <div>
                             {% include '_snippets/_disqus.html' %}
