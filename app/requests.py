@@ -11,7 +11,7 @@ class Request(object):
         'text': '^[a-zA-Z0-9 ]+$',
         'numbers': '^[0-9]+$',
         'characters': '^[a-zA-Z ]+$',
-        'email': '^[a-zA-Z@._]+$'  # this is temp, hans mat mohsin mujhe regex nahin atey
+        'email': '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     }
 
 # For all classes which inherit from 'Request' class and implement the validate method:-

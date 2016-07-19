@@ -15,7 +15,7 @@
 
               <h3 class="title animated infinite pulse">Sign Up</h3>
 
-              <form class="register-form" method="POST" novalidate>
+              <form class="register-form" method="POST">
                 <div class="form-group {% if errors['name'] %}{{'has-error'}}{% endif %}">
                   <label for="name">Full Name</label>
                   <input type="text" class="form-control" name="name" placeholder="Name" {% if form['name'] %}{{'value='+form['name']}}{% endif %} required>
