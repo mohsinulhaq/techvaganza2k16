@@ -1,56 +1,46 @@
 {% extends "base.html" %}
 
 {% block title %}
-    Contact Us
+  Contact Us
 {% endblock %}
 
-
 {% block content %}
+  <div class="wrapper">
+    <div class="register-background">
+      <div class="filter-black"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
+            <div class="register-card">
+              <h3 class="title animated infinite pulse">Contact Us</h3>
+              <form class="register-form" method="POST">
+                <label>Full Name</label>
+                <input type="text" class="form-control" name="name" placeholder="name" required>
 
-    <div class="wrapper">
-        <div class="register-background">
-            <div class="filter-black"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 ">
-                            <div class="register-card">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Email" name="email" required>
 
-                                <h3 class="title animated infinite pulse">Contact Us</h3>
-
-                                <form class="register-form" method="POST" action="#">
-                                    <label>Full Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="name" required>
-
-                                    <label>Email</label>
-                                    <input type="email" class="form-control" placeholder="Email" name="email" required>
-
-                                    <div class="form-group ">
-                    					<label for="msg">Message</label>
-                    					<textarea class="form-control" rows="6" placeholder="Enter Message" name="msg" required></textarea>
-                    			    </div>
-
-                                    <input class="btn btn-danger btn-block" type="submit" value="Send Mail">
-                                    <br>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group">
+                  <label for="msg">Message</label>
+                  <textarea class="form-control" rows="6" placeholder="Enter Message" name="msg" required></textarea>
                 </div>
 
-            <!-- Bottom Text -->
-            <div class="footer register-footer text-center">
-                    <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+                <input class="btn btn-danger btn-block" type="submit" value="Send Mail">
+                <br>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="footer register-footer text-center">
+        <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+      </div>
     </div>
-
+  </div>
 {% endblock %}
 
 {% block scripts %}
-
-    <script src="/static/js/ct-paper-checkbox.js"></script>
-    <script src="/static/js/ct-paper-radio.js"></script>
-    <script src="/static/js/ct-paper.js"></script>
-
+  <script src="/static/js/ct-paper-checkbox.js"></script>
+  <script src="/static/js/ct-paper-radio.js"></script>
+  <script src="/static/js/ct-paper.js"></script>
 {% endblock %}

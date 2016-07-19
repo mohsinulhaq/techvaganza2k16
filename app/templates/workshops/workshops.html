@@ -5,49 +5,46 @@
 {% endblock %}
 
 {% block content %}
+  <div class="wrapper">
+    <div class="register-background">
+      <div class="filter-black"></div>
+      <div class="container">
+        <div class="col-md-12">
+          <div class="housekeeping-well">
+            <section class="animated slideInUp">
+              <ol class="breadcrumb" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
+                <li><a href="{{ url_for('general.index') }}">Home</a></li>
+                <li class="active">Workshops</li>
+              </ol>
+              <hr>
+              <br>
 
-    <div class="wrapper">
-        <div class="register-background">
-            <div class="filter-black"></div>
-                <div class="container">
-                    <div class="col-md-12">
-                        <div class="housekeeping-well" >
-                            <section class="animated slideInUp">
-                                <ol class="breadcrumb" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
-                                  <li><a href="{{ url_for('general.index') }}">Home</a></li>
-                                  <li class="active">Workshops</li>
-                                </ol>
-                                <hr>
-                                <br>
-
-                                {% for workshop in pagination.items %}
-                                  <div class="" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
-                                    <a href="{{ url_for('general.workshop', slug = workshop.slug) }}">
-                                        <h3 style="color: #51658e">{{ workshop.title }}</h3>
-                                    </a>
-                                    <p style="color: #f2efe7">
-                                        <em>{{ workshop.description }}</em>
-                                    </p>
-                                    <br>
-                                  </div>
-                                  <br>
-                                {% endfor %}
-
-                                <div class="text-center">
-                                    {{ pagination_macro(entities, pagination) }}
-                                </div>
-                            </section>
-                        </div>
-                    </div>
+              {% for workshop in pagination.items %}
+                <div class="" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
+                  <a href="{{ url_for('general.workshop', slug = workshop.slug) }}">
+                    <h3 style="color: #51658e">{{ workshop.title }}</h3>
+                  </a>
+                  <p style="color: #f2efe7">
+                    <em>{{ workshop.description }}</em>
+                  </p>
+                  <br>
                 </div>
+                <br>
+              {% endfor %}
 
-            <!-- Bottom Text -->
-            <br><br><br><br><br>
-            <div class="footer register-footer text-center">
-                <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
-            </div>
+              <div class="text-center">
+                {{ pagination_macro(entities, pagination) }}
+              </div>
+            </section>
+          </div>
         </div>
       </div>
+      <br><br><br><br><br>
+      <div class="footer register-footer text-center">
+        <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}
 
