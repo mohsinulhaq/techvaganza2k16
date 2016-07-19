@@ -1,1 +1,438 @@
-!function(e){var t=function(i,n,s){s&&(s.stopPropagation(),s.preventDefault()),this.$element=e(i),this.$newElement=null,this.button=null,this.options=e.extend({},e.fn.selectpicker.defaults,this.$element.data(),"object"==typeof n&&n),null==this.options.title&&(this.options.title=this.$element.attr("title")),this.val=t.prototype.val,this.render=t.prototype.render,this.init()};t.prototype={constructor:t,init:function(t){var i=this;this.$element.hide(),this.multiple=this.$element.prop("multiple");var n=void 0!==this.$element.attr("class")?this.$element.attr("class").split(/\s+/):"",s=this.$element.attr("id");this.$element.after(this.createView()),this.$newElement=this.$element.next(".select");var o=this.$newElement,l=this.$newElement.find(".dropdown-menu"),d=this.$newElement.find(".dropdown-arrow"),r=(l.find("li > a"),o.addClass("open").find(".dropdown-menu li > a").outerHeight());o.removeClass("open");var a=l.find("li .divider").outerHeight(!0),h=this.$newElement.offset().top,p=0,c=this.$newElement.outerHeight();this.button=this.$newElement.find("> button"),void 0!==s&&(this.button.attr("id",s),e('label[for="'+s+'"]').click(function(){o.find("button#"+s).focus()}));for(var u=0;u<n.length;u++)"selectpicker"!=n[u]&&this.$newElement.addClass(n[u]);this.multiple&&this.$newElement.addClass("select-multiple"),this.button.addClass(this.options.style),l.addClass(this.options.menuStyle),d.addClass(function(){return i.options.menuStyle?i.options.menuStyle.replace("dropdown-","dropdown-arrow-"):void 0}),this.checkDisabled(),this.checkTabIndex(),this.clickListener();var f=parseInt(l.css("padding-top"))+parseInt(l.css("padding-bottom"))+parseInt(l.css("border-top-width"))+parseInt(l.css("border-bottom-width"));if("auto"==this.options.size){var m=debounce(function(){var t=h-e(window).scrollTop(),i=e(window).innerHeight(),n=f+parseInt(l.css("margin-top"))+parseInt(l.css("margin-bottom"))+2,s=i-t-c-n;p=s,o.hasClass("dropup")&&(p=t-n),p>=300&&(p=300),l.css({"max-height":p+"px","overflow-y":"auto","min-height":3*r+"px"})},50);e(window).on("scroll",m),e(window).on("resize",m),window.MutationObserver?new MutationObserver(m).observe(this.$element.get(0),{childList:!0}):this.$element.bind("DOMNodeInserted",m)}else if(this.options.size&&"auto"!=this.options.size&&l.find("li").length>this.options.size){var v=l.find("li > *").filter(":not(.divider)").slice(0,this.options.size).last().parent().index(),w=l.find("li").slice(0,v+1).find(".divider").length;p=r*this.options.size+w*a+f,l.css({"max-height":p+"px","overflow-y":"scroll"})}window.MutationObserver?new MutationObserver(e.proxy(this.reloadLi,this)).observe(this.$element.get(0),{childList:!0}):this.$element.bind("DOMNodeInserted",e.proxy(this.reloadLi,this)),this.render()},createDropdown:function(){var t="<div class='btn-group select'><button class='btn dropdown-toggle clearfix' data-toggle='dropdown'><span class='filter-option'></span>&nbsp;<span class='caret'></span></button><span class='dropdown-arrow'></span><ul class='dropdown-menu' role='menu'></ul></div>";return e(t)},createView:function(){var e=this.createDropdown(),t=this.createLi();return e.find("ul").append(t),e},reloadLi:function(){this.destroyLi(),$li=this.createLi(),this.$newElement.find("ul").append($li),this.render()},destroyLi:function(){this.$newElement.find("li").remove()},createLi:function(){var t=this,i=[],n=[],s="";if(this.$element.find("option").each(function(){i.push(e(this).text())}),this.$element.find("option").each(function(i){var s=void 0!==e(this).attr("class")?e(this).attr("class"):"",o=e(this).text(),l=void 0!==e(this).data("subtext")?'<small class="muted">'+e(this).data("subtext")+"</small>":"";if(o+=l,e(this).parent().is("optgroup")&&1!=e(this).data("divider"))if(0==e(this).index()){var d=e(this).parent().attr("label"),r=void 0!==e(this).parent().data("subtext")?'<small class="muted">'+e(this).parent().data("subtext")+"</small>":"";d+=r,0!=e(this)[0].index?n.push('<div class="divider"></div><dt>'+d+"</dt>"+t.createA(o,"opt "+s)):n.push("<dt>"+d+"</dt>"+t.createA(o,"opt "+s))}else n.push(t.createA(o,"opt "+s));else 1==e(this).data("divider")?n.push('<div class="divider"></div>'):1==e(this).data("hidden")?n.push(""):n.push(t.createA(o,s))}),i.length>0)for(var o=0;o<i.length;o++){this.$element.find("option").eq(o);s+="<li rel="+o+">"+n[o]+"</li>"}return 0!=this.$element.find("option:selected").length||t.options.title||this.$element.find("option").eq(0).prop("selected",!0).attr("selected","selected"),e(s)},createA:function(e,t){return'<a tabindex="-1" href="#" class="'+t+'"><span class="">'+e+"</span></a>"},render:function(){var t=this;if("auto"==this.options.width){var i=this.$newElement.find(".dropdown-menu").css("width");this.$newElement.css("width",i)}else this.options.width&&"auto"!=this.options.width&&this.$newElement.css("width",this.options.width);this.$element.find("option").each(function(i){t.setDisabled(i,e(this).is(":disabled")||e(this).parent().is(":disabled")),t.setSelected(i,e(this).is(":selected"))});var n=this.$element.find("option:selected").map(function(t,i){return void 0!=e(this).attr("title")?e(this).attr("title"):e(this).text()}).toArray(),s=n.join(", ");if(t.multiple&&t.options.selectedTextFormat.indexOf("count")>-1){var o=t.options.selectedTextFormat.split(">");(o.length>1&&n.length>o[1]||1==o.length&&n.length>=2)&&(s=n.length+" of "+this.$element.find("option").length+" selected")}s||(s=void 0!=t.options.title?t.options.title:t.options.noneSelectedText),this.$element.next(".select").find(".filter-option").html(s)},setSelected:function(e,t){t?this.$newElement.find("li").eq(e).addClass("selected"):this.$newElement.find("li").eq(e).removeClass("selected")},setDisabled:function(e,t){t?this.$newElement.find("li").eq(e).addClass("disabled"):this.$newElement.find("li").eq(e).removeClass("disabled")},checkDisabled:function(){this.$element.is(":disabled")&&(this.button.addClass("disabled"),this.button.click(function(e){e.preventDefault()}))},checkTabIndex:function(){if(this.$element.is("[tabindex]")){var e=this.$element.attr("tabindex");this.button.attr("tabindex",e)}},clickListener:function(){var t=this;e("body").on("touchstart.dropdown",".dropdown-menu",function(e){e.stopPropagation()}),this.$newElement.on("click","li a",function(i){var n=e(this).parent().index(),s=e(this).parent(),o=s.parents(".select");if(t.multiple&&i.stopPropagation(),i.preventDefault(),o.prev("select").not(":disabled")&&!e(this).parent().hasClass("disabled")){if(t.multiple){var l=o.prev("select").find("option").eq(n).prop("selected");l?o.prev("select").find("option").eq(n).removeAttr("selected"):o.prev("select").find("option").eq(n).prop("selected",!0).attr("selected","selected")}else o.prev("select").find("option").removeAttr("selected"),o.prev("select").find("option").eq(n).prop("selected",!0).attr("selected","selected");o.find(".filter-option").html(s.text()),o.find("button").focus(),o.prev("select").trigger("change")}}),this.$newElement.on("click","li.disabled a, li dt, li .divider",function(t){t.preventDefault(),t.stopPropagation(),$select=e(this).parent().parents(".select"),$select.find("button").focus()}),this.$element.on("change",function(e){t.render()})},val:function(e){return void 0!=e?(this.$element.val(e),this.$element.trigger("change"),this.$element):this.$element.val()}},e.fn.selectpicker=function(i,n){var s,o=arguments,l=this.each(function(){var l=e(this),d=l.data("selectpicker"),r="object"==typeof i&&i;if(d)for(var a in i)d[a]=i[a];else l.data("selectpicker",d=new t(this,r,n));"string"==typeof i&&(property=i,d[property]instanceof Function?([].shift.apply(o),s=d[property].apply(d,o)):s=d[property])});return void 0!=s?s:l},e.fn.selectpicker.defaults={style:null,size:"auto",title:null,selectedTextFormat:"values",noneSelectedText:"Nothing selected",width:null,menuStyle:null,toggleSize:null}}(window.jQuery);
+!function($) {
+    var Selectpicker = function(element, options, e) {
+        if (e ) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        this.$element = $(element);
+        this.$newElement = null;
+        this.button = null;
+
+        //Merge defaults, options and data-attributes to make our options
+        this.options = $.extend({}, $.fn.selectpicker.defaults, this.$element.data(), typeof options == 'object' && options);
+
+        //If we have no title yet, check the attribute 'title' (this is missed by jq as its not a data-attribute
+        if(this.options.title==null)
+            this.options.title = this.$element.attr('title');
+
+        //Expose public methods
+        this.val = Selectpicker.prototype.val;
+        this.render = Selectpicker.prototype.render;
+        this.init();
+    };
+
+    Selectpicker.prototype = {
+
+        constructor: Selectpicker,
+
+        init: function (e) {
+            var _this = this;
+            this.$element.hide();
+            this.multiple = this.$element.prop('multiple');
+
+
+            var classList = this.$element.attr('class') !== undefined ? this.$element.attr('class').split(/\s+/) : '';
+            var id = this.$element.attr('id');
+            this.$element.after( this.createView() );
+            this.$newElement = this.$element.next('.select');
+            var select = this.$newElement;
+            var menu = this.$newElement.find('.dropdown-menu');
+            var menuArrow = this.$newElement.find('.dropdown-arrow');
+            var menuA = menu.find('li > a');
+            var liHeight = select.addClass('open').find('.dropdown-menu li > a').outerHeight();
+            select.removeClass('open');
+            var divHeight = menu.find('li .divider').outerHeight(true);
+            var selectOffset_top = this.$newElement.offset().top;
+            var size = 0;
+            var menuHeight = 0;
+            var selectHeight = this.$newElement.outerHeight();
+            this.button = this.$newElement.find('> button');
+            if (id !== undefined) {
+                this.button.attr('id', id);
+                $('label[for="' + id + '"]').click(function(){ select.find('button#'+id).focus(); })
+            }
+            for (var i = 0; i < classList.length; i++) {
+                if(classList[i] != 'selectpicker') {
+                    this.$newElement.addClass(classList[i]);
+                }
+            }
+            //If we are multiple, then add the show-tick class by default
+            if(this.multiple) {
+                 this.$newElement.addClass('select-multiple');
+            }
+            this.button.addClass(this.options.style);
+            menu.addClass(this.options.menuStyle);
+            menuArrow.addClass(function() {
+                if (_this.options.menuStyle) {
+                    return _this.options.menuStyle.replace('dropdown-', 'dropdown-arrow-');
+                }
+            });
+            this.checkDisabled();
+            this.checkTabIndex();
+            this.clickListener();
+            var menuPadding = parseInt(menu.css('padding-top')) + parseInt(menu.css('padding-bottom')) + parseInt(menu.css('border-top-width')) + parseInt(menu.css('border-bottom-width'));
+            if (this.options.size == 'auto') {
+
+                // Creative Tim Changes: We changed the regular function made in bootstrap-select with this function so the getSize() will not be triggered one million times per second while you scroll.
+
+                var getSize = debounce(function() {
+                     var selectOffset_top_scroll = selectOffset_top - $(window).scrollTop();
+                    var windowHeight = $(window).innerHeight();
+                    var menuExtras = menuPadding + parseInt(menu.css('margin-top')) + parseInt(menu.css('margin-bottom')) + 2;
+                    var selectOffset_bot = windowHeight - selectOffset_top_scroll - selectHeight - menuExtras;
+                    menuHeight = selectOffset_bot;
+                    if (select.hasClass('dropup')) {
+                        menuHeight = selectOffset_top_scroll - menuExtras;
+                    }
+                    //limit menuHeight to 300px to have a smooth transition with cubic bezier on dropdown
+                    if(menuHeight >= 300){
+                        menuHeight = 300;
+                    }
+
+                    menu.css({'max-height' : menuHeight + 'px', 'overflow-y' : 'auto', 'min-height' : liHeight * 3 + 'px'});
+
+                }, 50);
+
+                getSize;
+                $(window).on('scroll', getSize);
+                $(window).on('resize', getSize);
+
+                if (window.MutationObserver) {
+                    new MutationObserver(getSize).observe(this.$element.get(0), {
+                        childList: true
+                    });
+                } else {
+                    this.$element.bind('DOMNodeInserted', getSize);
+                }
+            } else if (this.options.size && this.options.size != 'auto' && menu.find('li').length > this.options.size) {
+                var optIndex = menu.find("li > *").filter(':not(.divider)').slice(0,this.options.size).last().parent().index();
+                var divLength = menu.find("li").slice(0,optIndex + 1).find('.divider').length;
+                menuHeight = liHeight*this.options.size + divLength*divHeight + menuPadding;
+                menu.css({'max-height' : menuHeight + 'px', 'overflow-y' : 'scroll'});
+                //console.log('sunt in if');
+            }
+
+            // Listen for updates to the DOM and re render... (Use Mutation Observer when availiable)
+            if (window.MutationObserver) {
+                new MutationObserver($.proxy(this.reloadLi, this)).observe(this.$element.get(0), {
+                    childList: true
+                });
+            } else {
+                this.$element.bind('DOMNodeInserted', $.proxy(this.reloadLi, this));
+            }
+
+            this.render();
+        },
+
+        createDropdown: function() {
+            var drop =
+                "<div class='btn-group select'>" +
+                    "<button class='btn dropdown-toggle clearfix' data-toggle='dropdown'>" +
+                        "<span class='filter-option'></span>&nbsp;" +
+                        "<span class='caret'></span>" +
+                    "</button>" +
+                    "<span class='dropdown-arrow'></span>" +
+                    "<ul class='dropdown-menu' role='menu'>" +
+                    "</ul>" +
+                "</div>";
+
+            return $(drop);
+        },
+
+
+        createView: function() {
+            var $drop = this.createDropdown();
+            var $li = this.createLi();
+            $drop.find('ul').append($li);
+            return $drop;
+        },
+
+        reloadLi: function() {
+            //Remove all children.
+            this.destroyLi();
+            //Re build
+            $li = this.createLi();
+            this.$newElement.find('ul').append( $li );
+            //render view
+            this.render();
+        },
+
+        destroyLi:function() {
+            this.$newElement.find('li').remove();
+        },
+
+        createLi: function() {
+
+            var _this = this;
+            var _li = [];
+            var _liA = [];
+            var _liHtml = '';
+
+            this.$element.find('option').each(function(){
+                _li.push($(this).text());
+            });
+
+            this.$element.find('option').each(function(index) {
+                //Get the class and text for the option
+                var optionClass = $(this).attr("class") !== undefined ? $(this).attr("class") : '';
+               	var text =  $(this).text();
+               	var subtext = $(this).data('subtext') !== undefined ? '<small class="muted">'+$(this).data('subtext')+'</small>' : '';
+
+                //Append any subtext to the main text.
+                text+=subtext;
+
+                if ($(this).parent().is('optgroup') && $(this).data('divider') != true) {
+                    if ($(this).index() == 0) {
+                        //Get the opt group label
+                        var label = $(this).parent().attr('label');
+                        var labelSubtext = $(this).parent().data('subtext') !== undefined ? '<small class="muted">'+$(this).parent().data('subtext')+'</small>' : '';
+                        label += labelSubtext;
+
+                        if ($(this)[0].index != 0) {
+                            _liA.push(
+                                '<div class="divider"></div>'+
+                                '<dt>'+label+'</dt>'+
+                                _this.createA(text, "opt " + optionClass )
+                                );
+                        } else {
+                            _liA.push(
+                                '<dt>'+label+'</dt>'+
+                                _this.createA(text, "opt " + optionClass ));
+                        }
+                    } else {
+                         _liA.push( _this.createA(text, "opt " + optionClass )  );
+                    }
+                } else if ($(this).data('divider') == true) {
+                    _liA.push('<div class="divider"></div>');
+                } else if ($(this).data('hidden') == true) {
+	                _liA.push('');
+                } else {
+                    _liA.push( _this.createA(text, optionClass ) );
+                }
+            });
+
+            if (_li.length > 0) {
+                for (var i = 0; i < _li.length; i++) {
+                    var $option = this.$element.find('option').eq(i);
+                    _liHtml += "<li rel=" + i + ">" + _liA[i] + "</li>";
+                }
+            }
+
+            //If we dont have a selected item, and we dont have a title, select the first element so something is set in the button
+            if(this.$element.find('option:selected').length==0 && !_this.options.title) {
+                this.$element.find('option').eq(0).prop('selected', true).attr('selected', 'selected');
+            }
+
+            return $(_liHtml);
+        },
+
+        createA:function(test, classes) {
+         return '<a tabindex="-1" href="#" class="'+classes+'">' +
+                 '<span class="">' + test + '</span>' +
+                 '</a>';
+
+        },
+
+         render:function() {
+            var _this = this;
+
+            //Set width of select
+             if (this.options.width == 'auto') {
+                 var ulWidth = this.$newElement.find('.dropdown-menu').css('width');
+                 this.$newElement.css('width',ulWidth);
+             } else if (this.options.width && this.options.width != 'auto') {
+                 this.$newElement.css('width',this.options.width);
+             }
+
+            //Update the LI to match the SELECT
+            this.$element.find('option').each(function(index) {
+               _this.setDisabled(index, $(this).is(':disabled') || $(this).parent().is(':disabled') );
+               _this.setSelected(index, $(this).is(':selected') );
+            });
+
+
+
+            var selectedItems = this.$element.find('option:selected').map(function(index,value) {
+                if($(this).attr('title')!=undefined) {
+                    return $(this).attr('title');
+                } else {
+                    return $(this).text();
+                }
+            }).toArray();
+
+            //Convert all the values into a comma delimited string
+            var title = selectedItems.join(", ");
+
+            //If this is multi select, and the selectText type is count, the show 1 of 2 selected etc..
+            if(_this.multiple && _this.options.selectedTextFormat.indexOf('count') > -1) {
+                var max = _this.options.selectedTextFormat.split(">");
+                if( (max.length>1 && selectedItems.length > max[1]) || (max.length==1 && selectedItems.length>=2)) {
+                    title = selectedItems.length +' of ' + this.$element.find('option').length + ' selected';
+                }
+             }
+
+            //If we dont have a title, then use the default, or if nothing is set at all, use the not selected text
+            if(!title) {
+                title = _this.options.title != undefined ? _this.options.title : _this.options.noneSelectedText;
+            }
+
+            this.$element.next('.select').find('.filter-option').html( title );
+	    },
+
+
+
+        setSelected:function(index, selected) {
+            if(selected) {
+                this.$newElement.find('li').eq(index).addClass('selected');
+            } else {
+                this.$newElement.find('li').eq(index).removeClass('selected');
+            }
+        },
+
+        setDisabled:function(index, disabled) {
+            if(disabled) {
+                this.$newElement.find('li').eq(index).addClass('disabled');
+            } else {
+                this.$newElement.find('li').eq(index).removeClass('disabled');
+            }
+        },
+
+        checkDisabled: function() {
+            if (this.$element.is(':disabled')) {
+                this.button.addClass('disabled');
+                this.button.click(function(e) {
+                    e.preventDefault();
+                });
+            }
+        },
+
+		checkTabIndex: function() {
+			if (this.$element.is('[tabindex]')) {
+				var tabindex = this.$element.attr("tabindex");
+				this.button.attr('tabindex', tabindex);
+			}
+		},
+
+		clickListener: function() {
+            var _this = this;
+
+            $('body').on('touchstart.dropdown', '.dropdown-menu', function (e) { e.stopPropagation(); });
+
+
+
+            this.$newElement.on('click', 'li a', function(e){
+                var clickedIndex = $(this).parent().index(),
+                    $this = $(this).parent(),
+                    $select = $this.parents('.select');
+
+
+                //Dont close on multi choice menu
+                if(_this.multiple) {
+                    e.stopPropagation();
+                }
+
+                e.preventDefault();
+
+                //Dont run if we have been disabled
+                if ($select.prev('select').not(':disabled') && !$(this).parent().hasClass('disabled')){
+                    //Deselect all others if not multi select box
+                    if (!_this.multiple) {
+                        $select.prev('select').find('option').removeAttr('selected');
+                        $select.prev('select').find('option').eq(clickedIndex).prop('selected', true).attr('selected', 'selected');
+                    }
+                    //Else toggle the one we have chosen if we are multi selet.
+                    else {
+                        var selected = $select.prev('select').find('option').eq(clickedIndex).prop('selected');
+
+                        if(selected) {
+                            $select.prev('select').find('option').eq(clickedIndex).removeAttr('selected');
+                        } else {
+                            $select.prev('select').find('option').eq(clickedIndex).prop('selected', true).attr('selected', 'selected');
+                        }
+                    }
+
+
+                    $select.find('.filter-option').html($this.text());
+                    $select.find('button').focus();
+
+                    // Trigger select 'change'
+                    $select.prev('select').trigger('change');
+                }
+
+            });
+
+           this.$newElement.on('click', 'li.disabled a, li dt, li .divider', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                $select = $(this).parent().parents('.select');
+                $select.find('button').focus();
+            });
+
+            this.$element.on('change', function(e) {
+                _this.render();
+            });
+        },
+
+        val:function(value) {
+
+            if(value!=undefined) {
+                this.$element.val( value );
+
+                this.$element.trigger('change');
+                return this.$element;
+            } else {
+                return this.$element.val();
+            }
+        }
+
+    };
+
+    $.fn.selectpicker = function(option, event) {
+       //get the args of the outer function..
+       var args = arguments;
+       var value;
+       var chain = this.each(function () {
+            var $this = $(this),
+                data = $this.data('selectpicker'),
+                options = typeof option == 'object' && option;
+
+            if (!data) {
+            	$this.data('selectpicker', (data = new Selectpicker(this, options, event)));
+            } else {
+            	for(var i in option) {
+            		data[i]=option[i];
+            	}
+            }
+
+            if (typeof option == 'string') {
+                //Copy the value of option, as once we shift the arguments
+                //it also shifts the value of option.
+                property = option;
+                if(data[property] instanceof Function) {
+                    [].shift.apply(args);
+                    value = data[property].apply(data, args);
+                } else {
+                    value = data[property];
+                }
+            }
+        });
+
+        if(value!=undefined) {
+            return value;
+        } else {
+            return chain;
+        }
+    };
+
+    $.fn.selectpicker.defaults = {
+        style: null,
+        size: 'auto',
+        title: null,
+        selectedTextFormat : 'values',
+        noneSelectedText : 'Nothing selected',
+        width: null,
+        menuStyle: null,
+        toggleSize: null
+    }
+
+}(window.jQuery);

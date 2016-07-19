@@ -1,1 +1,7 @@
-$(function(){var r=skrollr.init();skrollr.menu.init(r,{updateUrl:!1})});
+$(function() {
+    var s = skrollr.init();
+    skrollr.menu.init(s, {
+        //Add hash link (e.g. `#foo`) to URL or not.
+        updateUrl: false
+    });
+});
