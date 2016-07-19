@@ -21,7 +21,7 @@ def get_user(user_id):
         return jsonify(users)
     else:
         for user in res:
-            events.append(row2dict(user))
+            users.append(row2dict(user))
         return jsonify(users)
 
 
@@ -126,7 +126,7 @@ def get_event(event_id):
 
 
 # add an event using the POST method
-@api.route("/events", methods=["POST"])
+@api.route("/events/", methods=["POST"])
 def create_event():
     if not request.json or 'title' not in request.json or 'slug' not in request.json:
         abort(400)
