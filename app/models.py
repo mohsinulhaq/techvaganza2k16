@@ -1,4 +1,5 @@
 from app import db, bcrypt
+from sqlalchemy import UniqueConstraint
 from sqlalchemy.ext.hybrid import hybrid_property
 
 
@@ -103,6 +104,9 @@ class EventRegistration(db.Model):
     created_on = db.Column(db.DateTime, server_default=db.func.now())
     updated_on = db.Column(db.DateTime, server_default=db.func.now(),
                            onupdate=db.func.now())
+    __table_args__ = (
+        UniqueConstraint('user_id', 'event_id'),
+    )
 
     def __init__(self, user_id, event_id):
         self.user_id = user_id
@@ -145,6 +149,9 @@ class WorkshopRegistration(db.Model):
     created_on = db.Column(db.DateTime, server_default=db.func.now())
     updated_on = db.Column(db.DateTime, server_default=db.func.now(),
                            onupdate=db.func.now())
+    __table_args__ = (
+        UniqueConstraint('user_id', 'workshop_id'),
+    )
 
     def __init__(self, user_id, workshop_id):
         self.user_id = user_id

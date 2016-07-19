@@ -1,37 +1,39 @@
 {% extends "base.html" %}
 
 {% block title %}
-    {{ current_user.name }}
+  {{ current_user.name }}
 {% endblock %}
 
 {% block content %}
-
-    <div class="wrapper">
-        <div class="register-background">
-            <div class="filter-black"></div>
-                <div class="container">
-                    <div class="col-md-10 col-md-offset-1">
-                        <div class="housekeeping-well" >
-
-                        {# Body goes here.#}
-                          <h1>{{ current_user.name }}</h1>
-
-                        </div>
-                    </div>
-                </div>
-
-            <!-- Bottom Text -->
-            <br><br><br><br><br>
-            <div class="footer register-footer text-center">
-                <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
-            </div>
+  <div class="wrapper">
+    <div class="register-background">
+      <div class="filter-black"></div>
+      <div class="container housekeeping-well">
+        <div class="col-md-6 col-xs-12 text-center">
+          Events
+          <ul>
+            {% for event in events %}
+              <li><a href="{{ url_for('general.event', slug=event.slug) }}" target="_blank">{{ event.title }}</a></li>
+            {% endfor %}
+          </ul>
         </div>
+        <div class="col-md-6 col-xs-12 text-center">
+          Workshops
+          <ul>
+            {% for workshop in workshops %}
+              <li><a href="{{ url_for('general.workshop', slug=workshop.slug) }}" target="_blank">{{ workshop.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      <br><br><br><br><br>
+      <div class="footer register-footer text-center">
+        <h6 style="color: white;">&copy; Techvaganza 2k16</h6>
+      </div>
     </div>
-
+  </div>
 {% endblock %}
 
 {% block scripts %}
-
-    <script src={{ url_for('static', filename='js/ct-paper.js') }}></script>
-
+  <script src={{ url_for('static', filename='js/ct-paper.js') }}></script>
 {% endblock %}
