@@ -5,20 +5,19 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Techvaganza' 16 is an annual national level technical Festival of National Institute of Technology, Srinagar. {% block meta_description %}{% endblock %}">
+  <meta name="description" content="Techvaganza is an annual national level technical festival of National Institute of Technology, Srinagar. {% block meta_description %}{% endblock %}">
   <meta name="keywords" content="NIT, Srinagar, Techvaganza, National Institute of Technology, Techfest, Register" />
   <title> {% block title %}{% endblock %} | Techvaganza 2k16</title>
   <link rel="shortcut icon" href={{ url_for('static', filename='img/favicon.ico') }}/>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/bootstrap.min.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/component.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/animate.min.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/ct-paper.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/examples.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/font-awesome.min.css') }}>
-  <link rel="stylesheet" href={{ url_for('static', filename='css/montserrat.css') }}>
+  {% assets 'css' %}
+    <link rel="stylesheet" href="{{ ASSET_URL }}"/>
+  {% endassets %}
   <style rel="stylesheet">
     .housekeeping-well > * {
       color: #f2efe7;
+    }
+    .btn {
+      border-radius: 0;
     }
     .form-danger {
         color: #ce040c;
@@ -108,11 +107,9 @@
   </div>
 {% endif %}
 
-<!-- Scripts -->
-<script type="text/javascript" src={{ url_for('static', filename='js/jquery.min.js') }}></script>
-<script type="text/javascript" src={{ url_for('static', filename='js/jquery-ui-1.10.4.custom.min.js') }}></script>
-<script type="text/javascript" src={{ url_for('static', filename='js/bootstrap.min.js') }}></script>
-<script type="text/javascript" src={{ url_for('static', filename='js/classie.js') }}></script>
+{% assets 'js' %}
+  <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+{% endassets %}
 
 {% block scripts %} {% endblock %}
 </body>
