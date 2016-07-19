@@ -27,7 +27,7 @@
 
                 <div class="form-group {% if errors['email'] %}{{'has-error'}}{% endif %}">
                   <label for="email">Email</label>
-                  <input type="text" class="form-control" name="email" placeholder="Email"
+                  <input type="text" class="form-control email" name="email" placeholder="Email" autocomplete="off"
                           {% if form['email'] %}{{'value='+form['email']}}{% endif %} required>
                   {% if errors['email'] %}
                    <p class="form-danger">{{errors['email']}}</p>
