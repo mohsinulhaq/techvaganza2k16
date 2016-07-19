@@ -9,6 +9,7 @@ housekeeping = Blueprint('housekeeping', __name__)
 
 @housekeeping.route('/contact/', methods=['GET', 'POST'])
 def contact():
+    errors = None
     if request.method == 'POST':
         if "fuck" in request.form['msg']:
             flash("Sorry, we don't accept feedback from trolls")
@@ -26,11 +27,10 @@ def contact():
                               )
                 Mail(app).send(msg)
                 flash("Mail sent, thanks for feedback!")
-            else:
-                # TODO: Implements these in bootstrap/paperkit as individual form inputs field errors.
-                for error in errors:
-                    flash(errors[error])
-    return html_minify(render_template('housekeeping/contact.html'))
+
+    return html_minify(render_template('housekeeping/contact.html',
+                                       errors=errors,
+                                       form=request.form))
 
 
 @housekeeping.route('/<page>/')

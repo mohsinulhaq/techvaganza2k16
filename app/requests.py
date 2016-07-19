@@ -13,8 +13,6 @@ class Request(object):
         'characters': '^[a-zA-Z ]+$',
         'email': '^[a-zA-Z@._]+$'  # this is temp, hans mat mohsin mujhe regex nahin atey
     }
-    errors = {}
-
 
 # For all classes which inherit from 'Request' class and implement the validate method:-
 #
@@ -33,6 +31,7 @@ class ContactRequest(Request):
     """
     def validate(self, data):
         validate = True
+        errors = {}
 
         characters_regex = re.compile(self.rules['characters'])
         text_regex = re.compile(self.rules['text'])
@@ -40,15 +39,15 @@ class ContactRequest(Request):
 
         if not characters_regex.match(data['name']):
             validate = False
-            self.errors['name'] = 'Name can contain only characters'
+            errors['name'] = 'Name can contain only characters'
         if not email_regex.match(data['email']):
             validate = False
-            self.errors['email'] = 'Not a proper email format'
+            errors['email'] = 'Not a proper email format'
         if not text_regex.match(data['msg']):
             validate = False
-            self.errors['msg'] = 'Illegal input characters encountered'
+            errors['msg'] = 'Illegal input characters encountered'
 
-        return validate, self.errors
+        return validate, errors
 
 
 class RegisterRequest(Request):
@@ -57,6 +56,7 @@ class RegisterRequest(Request):
     """
     def validate(self, data):
         validate = True
+        errors = {}
 
         characters_regex = re.compile(self.rules['characters'])
         numbers_regex = re.compile(self.rules['numbers'])
@@ -64,27 +64,27 @@ class RegisterRequest(Request):
 
         if not characters_regex.match(data['name']):
             validate = False
-            self.errors['name'] = 'Name can contain only characters'
+            errors['name'] = 'Name can contain only characters'
         if not email_regex.match(data['email']):
             validate = False
-            self.errors['email'] = 'Not a proper email format'
+            errors['email'] = 'Not a proper email format'
         if len(data['password']) < 8:
             validate = False
-            self.errors['password'] = 'Password should be at least 8 characters long'
+            errors['password'] = 'Password should be at least 8 characters long'
         if not numbers_regex.match(data['cell']):
             validate = False
-            self.errors['cell'] = 'Name can contain only characters'
+            errors['cell'] = 'Cell no. can contain only integers'
         if not characters_regex.match(data['college']):
             validate = False
-            self.errors['college'] = 'College name can contain only characters'
+            errors['college'] = 'College name can contain only characters'
         if not numbers_regex.match(data['batch']):
             validate = False
-            self.errors['batch'] = 'Input your college freshman year'
+            errors['batch'] = 'Input your college freshman year'
         if not characters_regex.match(data['branch']):
             validate = False
-            self.errors['branch'] = 'Branch name can contain only characters'
+            errors['branch'] = 'Branch name can contain only characters'
 
-        return validate, self.errors
+        return validate, errors
 
 
 

@@ -22,45 +22,44 @@ def load_user(userid):
 
 @authentication.route('/register/', methods=['GET', 'POST'])
 def register():
+    errors = None
     if request.method == 'POST':
         validate, errors = RegisterRequest().validate(request.form)
         if validate:
-            # user = User(password=request.form['password'],
-            #             name=request.form['name'],
-            #             email=request.form['email'],
-            #             cell=request.form['cell'],
-            #             gender=request.form['gender'],
-            #             college=request.form['college'],
-            #             batch=request.form['batch'],
-            #             branch=request.form['branch'])
-            # user.email_confirmed = False
-            # db.session.add(user)
-            # db.session.commit()
-            #
-            # token = ts.dumps(request.form['email'], salt='email-confirm-key')
-            # confirm_url = url_for(
-            #     '.confirm_email',
-            #     token=token,
-            #     _external=True
-            # )
-            # html = render_template(
-            #     '_snippets/_activate.html',
-            #     confirm_url=confirm_url
-            # )
-            # msg = Message(subject="Confirm your email",
-            #               sender='techvaganza2k16@gmail.com',
-            #               recipients=[request.form['email']],
-            #               html=html
-            #               )
-            # Mail(app).send(msg)
+            user = User(password=request.form['password'],
+                        name=request.form['name'],
+                        email=request.form['email'],
+                        cell=request.form['cell'],
+                        gender=request.form['gender'],
+                        college=request.form['college'],
+                        batch=request.form['batch'],
+                        branch=request.form['branch'])
+            user.email_confirmed = False
+            db.session.add(user)
+            db.session.commit()
+
+            token = ts.dumps(request.form['email'], salt='email-confirm-key')
+            confirm_url = url_for(
+                '.confirm_email',
+                token=token,
+                _external=True
+            )
+            html = render_template(
+                '_snippets/_activate.html',
+                confirm_url=confirm_url
+            )
+            msg = Message(subject="Confirm your email",
+                          sender='techvaganza2k16@gmail.com',
+                          recipients=[request.form['email']],
+                          html=html
+                          )
+            Mail(app).send(msg)
 
             flash('Registration Successful! Please confirm your email within 24 hours.')
             return redirect(url_for('.login'))
-        else:
-            # TODO: Implements these in bootstrap/paperkit as individual form inputs field errors.
-            for error in errors:
-                flash(errors[error])
-    return html_minify(render_template('register.html'))
+    return html_minify(render_template('register.html',
+                                       errors=errors,
+                                       form=request.form))
 
 
 @authentication.route('/confirm/<token>')
