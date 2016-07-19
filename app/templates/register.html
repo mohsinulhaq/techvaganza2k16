@@ -88,21 +88,21 @@
                 </div>
 
                 <div class="form-group {% if errors['batch'] %}{{'has-error'}}{% endif %}">
-                    <label>Batch</label>
-                    <input type="number" class="form-control" name="batch" placeholder="Batch"
-                            {% if form['batch'] %}{{'value='+form['batch']}}{% endif %} required>
-                    {% if errors['batch'] %}
-                       <p class="form-danger">{{errors['batch']}}</p>
-                    {% endif %}
+                  <label>Batch</label>
+                  <input type="number" class="form-control" name="batch" placeholder="Batch"
+                          {% if form['batch'] %}{{'value='+form['batch']}}{% endif %} required>
+                  {% if errors['batch'] %}
+                     <p class="form-danger">{{errors['batch']}}</p>
+                  {% endif %}
                 </div>
 
                 <div class="form-group {% if errors['branch'] %}{{'has-error'}}{% endif %}">
-                    <label>Branch</label>
-                    <input type="text" class="form-control" name="branch" placeholder="Branch"
-                            {% if form['branch'] %}{{'value='+form['branch']}}{% endif %} required>
-                    {% if errors['branch'] %}
-                       <p class="form-danger">{{errors['branch']}}</p>
-                    {% endif %}
+                  <label>Branch</label>
+                  <input type="text" class="form-control" name="branch" placeholder="Branch"
+                          {% if form['branch'] %}{{'value='+form['branch']}}{% endif %} required>
+                  {% if errors['branch'] %}
+                     <p class="form-danger">{{errors['branch']}}</p>
+                  {% endif %}
                 </div>
 
                 <input class="btn btn-danger btn-block register" type="submit" value="Register">

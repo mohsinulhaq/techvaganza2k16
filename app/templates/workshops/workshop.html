@@ -30,21 +30,22 @@
             <hr>
             <section class="animated slideInUp" style="background-color: rgba(0, 0, 0, 0.1); padding: 1%;">
               {{ workshop.body | safe }}
+              <br>
+              <div class="text-center">
+                <div class="text-center">
+                  <a class="btn {% if not registered %}btn-danger{% else %}btn-info{% endif %} register">
+                    {% if not registered %}
+                      Register
+                      {% else %}
+                      Unregister
+                    {% endif %}
+                  </a>
+                </div>
+              </div>
+              <br>
             </section>
 
             <br>
-            <div class="text-center">
-              <div class="text-center">
-                <a class="btn btn-danger register">
-                  {% if not registered %}
-                    Register
-                    {% else %}
-                    Unregister
-                  {% endif %}
-                </a>
-              </div>
-            </div>
-
             <div>
               {% include '_snippets/_disqus.html' %}
             </div>
@@ -72,9 +73,14 @@
         success: function(response) {
           if (response.success) {
             if (response.registered) {
-              $('.register').text('Unregister');
+              $('.register').text('Unregister')
+                            .removeClass('btn-danger')
+                            .addClass('btn-info');
             } else {
-              $('.register').text('Register');
+              $('.register').text('Register')
+                            .removeClass('btn-info')
+                            .addClass('btn-danger');
+
             }
           } else {
             if (response.login_required) {
