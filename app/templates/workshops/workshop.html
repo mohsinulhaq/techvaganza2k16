@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block meta_description %}
+  {{ workshop.description }}
+{% endblock %}
+
 {% block title %}
   {{ workshop.title }}
 {% endblock %}

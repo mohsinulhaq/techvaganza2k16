@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+
   <div class="wrapper">
     <div class="register-background">
       <div class="filter-black"></div>
@@ -37,10 +38,11 @@
       </div>
     </div>
   </div>
+
 {% endblock %}
 
 {% block scripts %}
-  <script src="/static/js/ct-paper-checkbox.js"></script>
-  <script src="/static/js/ct-paper-radio.js"></script>
-  <script src="/static/js/ct-paper.js"></script>
+  <script type="text/javascript" src={{ url_for('static', filename='ct-paper-checkbox.js') }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename='ct-paper-radio.js') }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename='ct-paper.js') }}></script>
 {% endblock %}
