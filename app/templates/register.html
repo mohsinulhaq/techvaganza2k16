@@ -18,7 +18,8 @@
               <form class="register-form" method="POST">
                 <div class="form-group {% if errors['name'] %}{{'has-error'}}{% endif %}">
                   <label for="name">Full Name</label>
-                  <input type="text" class="form-control" name="name" placeholder="Name" {% if form['name'] %}{{'value='+form['name']}}{% endif %} required>
+                  <input type="text" class="form-control" name="name" placeholder="Name"
+                          {% if form['name'] %}{{'value='+form['name']}}{% endif %} required>
                   {% if errors['name'] %}
                    <p class="form-danger">{{errors['name']}}</p>
                   {% endif %}
@@ -26,7 +27,8 @@
 
                 <div class="form-group {% if errors['email'] %}{{'has-error'}}{% endif %}">
                   <label for="email">Email</label>
-                  <input type="text" class="form-control" name="email" placeholder="Email" {% if form['email'] %}{{'value='+form['email']}}{% endif %} required>
+                  <input type="text" class="form-control" name="email" placeholder="Email"
+                          {% if form['email'] %}{{'value='+form['email']}}{% endif %} required>
                   {% if errors['email'] %}
                    <p class="form-danger">{{errors['email']}}</p>
                   {% endif %}
@@ -42,7 +44,8 @@
 
                 <div class="form-group {% if errors['password'] %}{{'has-error'}}{% endif %}">
                   <label for="password">Password</label>
-                  <input type="password" class="form-control" name="password" placeholder="Password" {% if form['password'] %}{{'value='+form['password']}}{% endif %} required>
+                  <input type="password" class="form-control" name="password" placeholder="Password"
+                          {% if form['password'] %}{{'value='+form['password']}}{% endif %} required>
                   {% if errors['password'] %}
                    <p class="form-danger">{{errors['password']}}</p>
                   {% endif %}
@@ -50,7 +53,8 @@
 
                 <div class="form-group {% if errors['cell'] %}{{'has-error'}}{% endif %}">
                   <label>Cell No.</label>
-                  <input type="number" class="form-control" name="cell" placeholder="Cell No." {% if form['cell'] %}{{'value='+form['cell']}}{% endif %} required>
+                  <input type="number" class="form-control" name="cell" placeholder="Cell No."
+                          {% if form['cell'] %}{{'value='+form['cell']}}{% endif %} required>
                   {% if errors['cell'] %}
                    <p class="form-danger">{{errors['cell']}}</p>
                   {% endif %}
@@ -76,7 +80,8 @@
 
                 <div class="form-group {% if errors['college'] %}{{'has-error'}}{% endif %}">
                   <label>College</label>
-                  <input type="text" class="form-control" name="college" placeholder="College" {% if form['college'] %}{{'value='+form['college']}}{% endif %} required>
+                  <input type="text" class="form-control" name="college" placeholder="College"
+                          {% if form['college'] %}{{'value='+form['college']}}{% endif %} required>
                   {% if errors['college'] %}
                    <p class="form-danger">{{errors['college']}}</p>
                   {% endif %}
@@ -84,7 +89,8 @@
 
                 <div class="form-group {% if errors['batch'] %}{{'has-error'}}{% endif %}">
                     <label>Batch</label>
-                    <input type="number" class="form-control" name="batch" placeholder="Batch" {% if form['batch'] %}{{'value='+form['batch']}}{% endif %} required>
+                    <input type="number" class="form-control" name="batch" placeholder="Batch"
+                            {% if form['batch'] %}{{'value='+form['batch']}}{% endif %} required>
                     {% if errors['batch'] %}
                        <p class="form-danger">{{errors['batch']}}</p>
                     {% endif %}
@@ -92,7 +98,8 @@
 
                 <div class="form-group {% if errors['branch'] %}{{'has-error'}}{% endif %}">
                     <label>Branch</label>
-                    <input type="text" class="form-control" name="branch" placeholder="Branch" {% if form['branch'] %}{{'value='+form['branch']}}{% endif %} required>
+                    <input type="text" class="form-control" name="branch" placeholder="Branch"
+                            {% if form['branch'] %}{{'value='+form['branch']}}{% endif %} required>
                     {% if errors['branch'] %}
                        <p class="form-danger">{{errors['branch']}}</p>
                     {% endif %}

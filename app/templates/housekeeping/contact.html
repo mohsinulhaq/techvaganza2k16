@@ -20,21 +20,24 @@
                             <form class="register-form" method="POST" action="#">
                                 <div class="form-group {% if errors['name'] %}{{'has-error'}}{% endif %}">
                                     <label>Full Name</label>
-                                    <input type="text" class="form-control" name="name" placeholder="Name" {% if form['name'] %}{{'value='+form['name']}}{% endif %} required>
+                                    <input type="text" class="form-control" name="name" placeholder="Name"
+                                            {% if form['name'] %}{{'value='+form['name']}}{% endif %} required>
                                     {% if errors['name'] %}
                                        <p class="form-danger">{{errors['name']}}</p>
                                     {% endif %}
                                 </div>
                                 <div class="form-group {% if errors['email'] %}{{'has-error'}}{% endif %}">
                                     <label>Email</label>
-                                    <input type="email" class="form-control" placeholder="Email" name="email" {% if form['email'] %}{{'value='+form['email']}}{% endif %} required>
+                                    <input type="email" class="form-control" placeholder="Email" name="email"
+                                            {% if form['email'] %}{{'value='+form['email']}}{% endif %} required>
                                     {% if errors['email'] %}
                                        <p class="form-danger">{{errors['name']}}</p>
                                     {% endif %}
                                 </div>
                                 <div class="form-group {% if errors['msg'] %}{{'has-error'}}{% endif %}">
                                     <label for="msg">Message</label>
-                                    <textarea class="form-control" rows="6" placeholder="Enter Message" name="msg" required>{% if form['msg'] %}{{form['msg']}}{% endif %}</textarea>
+                                    <textarea class="form-control" rows="6" placeholder="Enter Message"
+                                              name="msg" required></textarea>
                                      {% if errors['msg'] %}
                                        <p class="form-danger">{{errors['msg']}}</p>
                                     {% endif %}
