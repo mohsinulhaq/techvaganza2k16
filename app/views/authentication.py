@@ -1,11 +1,12 @@
 from flask import Blueprint, render_template, flash, request, url_for, redirect, abort
 from app import app, db
 from app.models import User
-from flask_login import LoginManager, login_user, logout_user
+from flask_login import LoginManager, login_user, logout_user, current_user
 from htmlmin.minify import html_minify
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
 from app.requests import RegisterRequest
+from app.utils import OAuthSignIn
 
 authentication = Blueprint('authentication', __name__)
 
@@ -155,4 +156,30 @@ def reset_with_token(token):
 @authentication.route('/logout/', methods=['GET'])
 def logout():
     logout_user()
+    return redirect(url_for('general.index'))
+
+
+@authentication.route('/authorize/<provider>')
+def oauth_authorize(provider):
+    if not current_user.is_anonymous:
+        return redirect(url_for('general.index'))
+    oauth = OAuthSignIn.get_provider(provider)
+    return oauth.authorize()
+
+
+@authentication.route('/callback/<provider>')
+def oauth_callback(provider):
+    if not current_user.is_anonymous:
+        return redirect(url_for('general.index'))
+    oauth = OAuthSignIn.get_provider(provider)
+    social_id, username, email = oauth.callback()
+    if social_id is None:
+        flash('Authentication failed.')
+        return redirect(url_for('general.index'))
+    user = User.query.filter_by(social_id=social_id).first()
+    if not user:
+        user = User(social_id=social_id, username=username, email=email)
+        db.session.add(user)
+        db.session.commit()
+    login_user(user, True)
     return redirect(url_for('general.index'))

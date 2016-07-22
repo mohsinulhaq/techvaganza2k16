@@ -1,24 +1,26 @@
 from app import db, bcrypt
 from sqlalchemy import UniqueConstraint
 from sqlalchemy.ext.hybrid import hybrid_property
+from flask_login import UserMixin
 
 
 # -----------------------------------------------------------------------------------------
 #     'users' table
 # -----------------------------------------------------------------------------------------
-
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255))
+    social_id = db.Column(db.String(64), nullable=False, unique=True)
+    username = db.Column(db.String(64), nullable=False)
+    name = db.Column(db.String(128))
     _password = db.Column(db.String(128))
-    email = db.Column(db.String(255), unique=True)
-    cell = db.Column(db.String(255))
+    email = db.Column(db.String(64), unique=True)
+    cell = db.Column(db.String(64))
     gender = db.Column(db.String(6))
-    college = db.Column(db.String(255))
+    college = db.Column(db.String(128))
     batch = db.Column(db.Integer)
-    branch = db.Column(db.String(255))
+    branch = db.Column(db.String(64))
     email_confirmed = db.Column(db.Boolean, default=False, nullable=False)
     created_on = db.Column(db.DateTime, server_default=db.func.now())
     updated_on = db.Column(db.DateTime, server_default=db.func.now(),
@@ -34,18 +36,6 @@ class User(db.Model):
 
     def is_correct_password(self, plaintext):
         return bcrypt.check_password_hash(self._password, plaintext)
-
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return str(self.id)
 
     def __repr__(self):
         return '<User %r>' % self.name

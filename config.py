@@ -23,3 +23,15 @@ MAIL_PASSWORD = 'wtforms2k16'
 
 # number of times password is hashed
 BCRYPT_LOG_ROUNDS = 12
+
+
+OAUTH_CREDENTIALS = {
+    'facebook': {
+        'id': '',  # from our official facebook app
+        'secret': ''  # from our official facebook app
+    },
+    'google': {
+        'id': '',
+        'secret': ''
+    }
+}
